@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "lodash": "^4.17.5",
     "material-ui": "^0.20.0",
     "normalizr": "^3.2.4",
     "polished": "^1.9.2",

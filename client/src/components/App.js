@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import * as actions from '../actions';
 
 import Header from './Header';
-import Landing from './Landing';
+import Landing from '../screens/Landing';
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
 import ResetPassword from '../screens/ResetPassword';
