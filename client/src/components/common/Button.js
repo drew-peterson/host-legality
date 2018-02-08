@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { rem, lighten, darken } from 'polished';
+import { rem, darken } from 'polished';
 
 const Button = props => {
   const { link, children } = props;

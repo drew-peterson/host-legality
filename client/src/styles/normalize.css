@@ -9,14 +9,6 @@
  *    IE on Windows Phone and in iOS.
  */
 
-* {
-  box-sizing: border-box;
-}
-
-.debugger {
-  border: 1px solid red;
-}
-
 html {
   line-height: 1.15; /* 1 */
   -ms-text-size-adjust: 100%; /* 2 */

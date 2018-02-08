@@ -5,17 +5,12 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import * as actions from '../../actions';
-import { Input } from '../common';
+import { Input, Button, rem } from '../common';
 
 class LoginForm extends Component {
   async onFormSubmit(values) {
     const { history, localLogin } = this.props;
-
     localLogin(values, history);
-
-    // redux style of redirect after auth...
-    // const { from } = this.props.location.state || { from: { pathname: '/' } };
-    // localLogin(values, history, from);
   }
 
   render() {
@@ -25,20 +20,21 @@ class LoginForm extends Component {
       <Form onSubmit={handleSubmit(this.onFormSubmit.bind(this))}>
         <Field
           component={Input}
+          label="Email address"
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="enter your email address"
         />
         <Field
           component={Input}
+          label="Password"
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="enter your password"
         />
-        <button className="btn" type="submit" name="action">
+        <Button style={styles.btnStyle} type="submit" name="action">
           Login
-          <i className="material-icons right">send</i>
-        </button>
+        </Button>
 
         {errors && (
           <ErrorsText className="red-text center-align">
@@ -58,6 +54,12 @@ const ErrorsText = styled.p`
   margin-top: 20px !important;
   font-size: 20px;
 `;
+const styles = {
+  btnStyle: {
+    marginTop: rem(15),
+    width: rem(200)
+  }
+};
 
 function mapStateToProps({ errors }) {
   return { errors };

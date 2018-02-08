@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { H1, Button } from '../components/common';
+import { Row, Col } from 'react-flexbox-grid';
+import { H1, Button, rem } from '../components/common';
 import LoginForm from '../components/auth/LoginForm';
 
 class Login extends Component {
@@ -26,27 +27,43 @@ class Login extends Component {
     return (
       <Container>
         <H1>Welcome back!</H1>
-        <ButtonContainer>
-          <Button style={styles.btnStyle} link href="/auth/facebook">
-            Facebook
-          </Button>
-          <Button style={styles.btnStyle} link href="/auth/google">
-            Google
-          </Button>
-          <Button
-            onClick={() => this.setState({ emailPassword: !emailPassword })}
-            style={styles.btnStyle}
-          >
-            Log in with email
-          </Button>
-        </ButtonContainer>
+        <Row center="xs">
+          <Col xs={12} md={4}>
+            <Button
+              style={styles.btnStyle}
+              link
+              href="/auth/facebook"
+              backgroundColor="#264187"
+            >
+              Facebook
+            </Button>
+            <Button
+              style={styles.btnStyle}
+              link
+              href="/auth/google"
+              color="black"
+              backgroundColor="white"
+            >
+              Google
+            </Button>
+            <Button
+              onClick={() => this.setState({ emailPassword: !emailPassword })}
+              style={styles.btnStyle}
+            >
+              Log in with email
+            </Button>
+          </Col>
+        </Row>
 
         {emailPassword && (
-          <div>
-            <H1>Login</H1>
-            <LoginForm />
-            <Link to="/forgotPassword">Forgot Password</Link>
-          </div>
+          <Row center="xs">
+            <Col xs={12} md={4}>
+              <LoginForm />
+            </Col>
+            <Col xs={12}>
+              <Link to="/forgotPassword">Forgot Password</Link>
+            </Col>
+          </Row>
         )}
       </Container>
     );
@@ -58,16 +75,10 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 const styles = {
   btnStyle: {
-    width: '300px',
-    marginTop: '10px'
+    width: '100%',
+    marginTop: rem(15)
   }
 };
 

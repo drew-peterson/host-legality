@@ -1,42 +1,54 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-
-import SignupForm from "../components/auth/SignupForm";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import { Row, Col } from 'react-flexbox-grid';
+import SignupForm from '../components/auth/SignupForm';
+import { Button, H1, rem } from '../components/common';
 
 class Signup extends Component {
+  state = {
+    showEmail: false
+  };
   render() {
+    const { showEmail } = this.state;
     return (
       <Container>
-        <Title>Oauth Signup</Title>
-        <ButtonContainer>
-          <Button
-            facebook
-            href="/auth/facebook"
-            className="waves-effect btn deep-purple darken-3"
-          >
-            Facebook
-          </Button>
-          <Button
-            google
-            href="/auth/google"
-            className="waves-effect btn blue darken-2"
-          >
-            Google
-          </Button>
-        </ButtonContainer>
+        <H1>Get Started!</H1>
+        <Row center="xs">
+          <Col xs={12} md={4}>
+            <Button
+              style={styles.btnStyle}
+              link
+              href="/auth/facebook"
+              backgroundColor="#264187"
+            >
+              Facebook
+            </Button>
+            <Button
+              style={styles.btnStyle}
+              link
+              href="/auth/google"
+              backgroundColor="white"
+              color="black"
+            >
+              Google
+            </Button>
 
-        <hr style={{ marginTop: "20px", marginBottom: "20px" }} />
+            <Button
+              style={styles.btnStyle}
+              onClick={() => this.setState({ showEmail: !showEmail })}
+            >
+              Sign in with email
+            </Button>
+          </Col>
+        </Row>
 
-        <div className="row">
-          <div className="col s12 m8 offset-m2">
-            <div className="card blue-grey darken-1 ">
-              <div className="card-content white-text">
-                <span className="card-title">Signup</span>
-                <SignupForm />
-              </div>
-            </div>
-          </div>
-        </div>
+        {showEmail && (
+          <Row center="xs">
+            <Col xs={12} md={4}>
+              <SignupForm />
+            </Col>
+          </Row>
+        )}
       </Container>
     );
   }
@@ -47,18 +59,11 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const Title = styled.h1`
-  color: ${props => props.theme.dark};
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 15px;
-`;
-
-const Button = styled.a`
-  margin-left: ${props => (props.google ? "15px" : 0)};
-`;
+const styles = {
+  btnStyle: {
+    marginTop: rem(15),
+    width: '100%'
+  }
+};
 
 export default Signup;

@@ -1,10 +1,10 @@
-import './styles/normalize.css';
-// redux
+import './styles/index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import reducers from './reducers';
 import axios from 'axios';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import reduxThunk from 'redux-thunk';
 
@@ -23,7 +23,9 @@ const store = createStore(
 // when the store is update the provider component will update all its children w/ new state
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <MuiThemeProvider>
+      <App />
+    </MuiThemeProvider>
   </Provider>,
   document.querySelector('#root')
 );

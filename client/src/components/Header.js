@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { rem } from './common';
 
 import styled from 'styled-components';
 
@@ -33,9 +34,7 @@ class Header extends Component {
   render() {
     return (
       <NavBar>
-        <Link className="left brand-logo" to={this.props.auth ? '/' : '/'}>
-          Host Legality
-        </Link>
+        <Link to={this.props.auth ? '/' : '/'}>Host Legality</Link>
         <LinkContainer>{this.renderContent()}</LinkContainer>
       </NavBar>
     );
@@ -44,11 +43,11 @@ class Header extends Component {
 
 const NavBar = styled.nav`
   display: flex;
-  height: 65px;
+  height: ${rem(65)};
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid gray;
-  padding: 0 20px;
+  padding: 0 ${rem(20)};
 `;
 
 const LinkContainer = styled.ul`
@@ -58,17 +57,21 @@ const LinkContainer = styled.ul`
 
 const GetStartedBtn = styled.a`
   display: inline-block;
-  width: 174px;
-  height: 42px;
+  height: ${rem(42)};
+  width: ${rem(120)};
   background-color: #2ecc71;
-  font-size: 16px;
   font-weight: bold;
   color: #ffffff;
-  line-height: 42px;
+  line-height: ${rem(42)};
   text-align: center;
   text-decoration: none;
-  border-radius: 42px;
-  margin-left: 20px;
+  border-radius: ${rem(42)};
+  margin-left: ${rem(20)};
+
+  @media (min-width: ${rem(765)}) {
+    font-size: ${rem(16)};
+    width: ${rem(174)};
+  }
 `;
 
 const mapStateToProps = ({ auth }) => {

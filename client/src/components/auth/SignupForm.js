@@ -3,8 +3,8 @@ import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-
-import { Input } from '../common';
+// import { Row, Col } from 'react-flexbox-grid'; // there is a Grid property...
+import { Input, Button, rem } from '../common';
 import * as actions from '../../actions';
 
 class SignupForm extends Component {
@@ -21,48 +21,57 @@ class SignupForm extends Component {
 
     return (
       <Form onSubmit={handleSubmit(this.onFormSubmit.bind(this))}>
-        <div className="row">
-          <Field
-            className="col s12 m6"
-            component={Input}
-            name="firstName"
-            placeholder="First Name"
-            required
-          />
-          <Field
-            className="col s12 m6"
-            component={Input}
-            name="lastName"
-            placeholder="Last Name"
-            required
-          />
-        </div>
         <Field
-          className="col s12"
+          component={Input}
+          name="firstName"
+          placeholder="enter your first name"
+          label="First name"
+          required
+        />
+        <Field
+          component={Input}
+          name="lastName"
+          placeholder="enter your last name"
+          label="Last name"
+          required
+        />
+        <Field
           component={Input}
           type="email"
           name="email"
-          placeholder="Email"
+          placeholder="enter your email address"
+          label="Email address"
+          required
         />
         <Field
-          className="col s12"
           component={Input}
           type="password"
           name="password"
-          placeholder="Password"
+          placeholder="enter your password"
+          label="Password"
+          required
         />
-        <button className="btn" type="submit" name="action">
+        <Button
+          style={styles.btnStyle}
+          className="btn"
+          type="submit"
+          name="action"
+        >
           Submit
-          <i className="material-icons right">send</i>
-        </button>
+        </Button>
       </Form>
     );
   }
 }
 
-const Form = styled.form`
-  margin-top: 40px;
-`;
+const Form = styled.form``;
+
+const styles = {
+  btnStyle: {
+    marginTop: rem(15),
+    width: rem(200)
+  }
+};
 
 SignupForm = reduxForm({
   form: 'signupForm'
