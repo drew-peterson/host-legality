@@ -5,8 +5,6 @@ import { ThemeColor } from '../styles/themeColor';
 import { ThemeProvider } from 'styled-components';
 import * as actions from '../actions';
 
-// import "../styles/normalize.css";
-
 import Header from './Header';
 import Landing from './Landing';
 import Login from '../screens/Login';

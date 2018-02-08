@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { H1, Button } from '../components/common';
 import LoginForm from '../components/auth/LoginForm';
 
 class Login extends Component {
+  state = {
+    emailPassword: false
+  };
   componentWillUpdate(nextProps) {
     // optional redirect if they went to a protected route without logging in
     // from is set in require_auth
@@ -18,39 +22,32 @@ class Login extends Component {
   }
 
   render() {
+    const { emailPassword } = this.state;
     return (
       <Container>
-        <LoginTitle>Oauth login</LoginTitle>
+        <H1>Welcome back!</H1>
         <ButtonContainer>
-          <Button
-            facebook
-            href="/auth/facebook"
-            className="waves-effect btn deep-purple darken-3"
-          >
+          <Button style={styles.btnStyle} link href="/auth/facebook">
             Facebook
           </Button>
-          <Button
-            google
-            href="/auth/google"
-            className="waves-effect btn blue darken-2"
-          >
+          <Button style={styles.btnStyle} link href="/auth/google">
             Google
+          </Button>
+          <Button
+            onClick={() => this.setState({ emailPassword: !emailPassword })}
+            style={styles.btnStyle}
+          >
+            Log in with email
           </Button>
         </ButtonContainer>
 
-        <hr style={{ marginTop: '20px', marginBottom: '20px' }} />
-
-        <div className="row">
-          <div className="col s12 m8 offset-m2">
-            <div className="card blue-grey darken-1 ">
-              <div className="card-content white-text">
-                <span className="card-title">Login</span>
-                <LoginForm />
-                <Link to="/forgotPassword">Forgot Password</Link>
-              </div>
-            </div>
+        {emailPassword && (
+          <div>
+            <H1>Login</H1>
+            <LoginForm />
+            <Link to="/forgotPassword">Forgot Password</Link>
           </div>
-        </div>
+        )}
       </Container>
     );
   }
@@ -61,19 +58,19 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const LoginTitle = styled.h1`
-  color: ${props => props.theme.dark};
-`;
-
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: center;
-  margin-top: 15px;
+  flex-direction: column;
+  align-items: center;
 `;
 
-const Button = styled.a`
-  margin-left: ${props => (props.google ? '15px' : 0)};
-`;
+const styles = {
+  btnStyle: {
+    width: '300px',
+    marginTop: '10px'
+  }
+};
+
 const mapStateToProps = ({ auth }) => ({ auth });
 
 export default connect(mapStateToProps)(Login);
