@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ThemeColor } from '../styles/themeColor';
-import { ThemeProvider } from 'styled-components';
+
 import * as actions from '../actions';
 
 import Header from './Header';
@@ -27,24 +26,22 @@ class App extends Component {
 
   render() {
     return (
-      <ThemeProvider theme={ThemeColor}>
-        <Router>
-          <div>
-            <Header />
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
-              <Route path="/protected" component={requireAuth(Protected)} />
-              <Route path="/forgotPassword" component={ForgotPassword} />
-              <Route path="/properties" component={Properties} />
-              <Route path="/get-started" component={GetStarted} />
-              <Route path="/resetPassword/:token" component={ResetPassword} />
-              <Route component={NoMatch} />
-            </Switch>
-          </div>
-        </Router>
-      </ThemeProvider>
+      <Router>
+        <div>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/protected" component={requireAuth(Protected)} />
+            <Route path="/forgotPassword" component={ForgotPassword} />
+            <Route path="/properties" component={Properties} />
+            <Route path="/get-started" component={GetStarted} />
+            <Route path="/resetPassword/:token" component={ResetPassword} />
+            <Route component={NoMatch} />
+          </Switch>
+        </div>
+      </Router>
     );
   }
 }

@@ -25,7 +25,7 @@ class GooleAutoComplete extends React.Component {
   }
 
   render() {
-    const { placeholder, input, meta } = this.props;
+    const { placeholder } = this.props;
     const inputProps = {
       value: this.state.address,
       onChange: address => this.setState({ address }),
@@ -54,8 +54,7 @@ const myStyles = {
     marginTop: rem(7),
     padding: 0,
     display: 'block',
-    paddingBottom: rem(7),
-    outline: 'none'
+    paddingBottom: rem(7)
   },
   autocompleteContainer: { zIndex: '1000' }
   // autocompleteItem: { color: 'black' },

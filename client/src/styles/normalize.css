@@ -247,6 +247,8 @@ textarea {
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
   margin: 0; /* 2 */
+  -webkit-tap-highlight-color: none;
+  outline: none;
 }
 
 /**

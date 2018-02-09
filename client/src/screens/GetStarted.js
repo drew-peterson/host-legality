@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm } from 'redux-form';
 // import _ from 'lodash';
 import * as actions from '../actions';
 // import styled from 'styled-components';
 
-import { Container, H1, rem } from '../components/common';
-import { Row, Col } from 'react-flexbox-grid';
-import GoogleAutocomplete from '../utils/GoogleAutocomplete';
+import { Container, H1 } from '../components/common';
+// import { Row, Col } from 'react-flexbox-grid';
+// import GoogleAutocomplete from '../utils/GoogleAutocomplete';
 
 import AddProperty from '../components/get_started/AddProperty';
 
@@ -37,8 +37,8 @@ class GetStarted extends Component {
         <H1>Get Started</H1>
         <AddProperty
           previousPage={this.previousPage}
-          // onSubmit={this.nextPage}
-          onSubmit={this.onSubmitForm}
+          onSubmit={this.nextPage}
+          // onSubmit={this.onSubmitForm}
         />
       </Container>
     );

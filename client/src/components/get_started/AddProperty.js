@@ -50,12 +50,6 @@ const Form = styled.form`
   }
 `;
 
-const styles = {
-  autoComplete: {
-    marginTop: rem(15)
-  }
-};
-
 export default reduxForm({
   form: 'getStarted',
   destroyOnUnmount: false, // <------ preserve form data
