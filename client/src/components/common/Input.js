@@ -21,6 +21,7 @@ const Input = ({
       errorText={error}
       fullWidth={true}
       floatingLabelText={label}
+      floatingLabelFixed={true}
       defaultValue={defaultValue}
     />
   );

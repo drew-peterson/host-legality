@@ -12,12 +12,12 @@ class Header extends Component {
         return;
       case false:
         return [
-          <a key="1" href="/login">
+          <Link key="1" to="/login">
             Sign in
-          </a>,
-          <GetStartedBtn key="2" href="/signup">
-            Get started
-          </GetStartedBtn>
+          </Link>,
+          <Link to="/get-started" key="2">
+            <GetStartedBtn>Get started</GetStartedBtn>
+          </Link>
         ];
       default:
         return [
@@ -55,7 +55,7 @@ const LinkContainer = styled.ul`
   align-items: center;
 `;
 
-const GetStartedBtn = styled.a`
+const GetStartedBtn = styled.span`
   display: inline-block;
   height: ${rem(42)};
   width: ${rem(120)};

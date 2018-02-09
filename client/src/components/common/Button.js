@@ -1,11 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { rem, darken } from 'polished';
+import { Link } from 'react-router-dom';
 
 const Button = props => {
-  const { link, children } = props;
-  if (link) {
-    return <Link {...props}>{children}</Link>;
+  const { children, to, href } = props;
+  if (to) {
+    return (
+      <Link {...props} style={{ textDecoration: 'none' }}>
+        <LinkTag>{children}</LinkTag>
+      </Link>
+    );
+  } else if (href) {
+    return (
+      <a {...props} style={{ textDecoration: 'none' }}>
+        <LinkTag>{children}</LinkTag>
+      </a>
+    );
   }
   return <Btn {...props}>{children}</Btn>;
 };
@@ -39,7 +50,7 @@ const Btn = styled.button`
     transform: translateY(-0.2rem);
   }
 `;
-const Link = styled.a`
+const LinkTag = styled.span`
   position: relative;
   display: inline-flex;
   align-items: center;

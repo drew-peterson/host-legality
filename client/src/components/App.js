@@ -7,6 +7,10 @@ import * as actions from '../actions';
 
 import Header from './Header';
 import Landing from '../screens/Landing';
+import Properties from '../screens/Properties';
+import GetStarted from '../screens/GetStarted';
+
+// AUTH
 import Login from '../screens/Login';
 import Signup from '../screens/Signup';
 import ResetPassword from '../screens/ResetPassword';
@@ -17,6 +21,7 @@ class App extends Component {
   // preferred location for intial ajax request w/ new react
   // componentDidMount() {
   componentWillMount() {
+    console.log('fetch user');
     this.props.fetchUser(); // check auth...
   }
 
@@ -31,8 +36,10 @@ class App extends Component {
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
               <Route path="/protected" component={requireAuth(Protected)} />
-              <Route path="/resetPassword/:token" component={ResetPassword} />
               <Route path="/forgotPassword" component={ForgotPassword} />
+              <Route path="/properties" component={Properties} />
+              <Route path="/get-started" component={GetStarted} />
+              <Route path="/resetPassword/:token" component={ResetPassword} />
               <Route component={NoMatch} />
             </Switch>
           </div>
