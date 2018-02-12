@@ -28,9 +28,9 @@ const Btn = styled.button`
   justify-content: space-around;
   border-radius: ${rem(66)};
   box-shadow: inset 0 0 0 0.4rem
-      ${props => darken(0.04, props.backgroundColor || props.theme.green)},
+      ${props => darken(0.04, props.backgroundcolor || props.theme.green)},
     0 0.4rem 0 0 #e7e6e4;
-  background-color: ${props => props.backgroundColor || props.theme.green};
+  background-color: ${props => props.backgroundcolor || props.theme.green};
   color: ${props => props.color || '#fff'};
   transition: all 0.2s cubic-bezier(0.06, 0.67, 0.37, 0.99);
   font-weight: 500;
@@ -45,7 +45,7 @@ const Btn = styled.button`
 
   &:hover {
     box-shadow: inset 0 0 0 0.4rem
-        ${props => darken(0.06, props.backgroundColor || props.theme.green)},
+        ${props => darken(0.06, props.backgroundcolor || props.theme.green)},
       0 0.4rem 0 0 #e7e6e4;
     transform: translateY(-0.2rem);
   }
@@ -57,9 +57,9 @@ const LinkTag = styled.span`
   justify-content: space-around;
   border-radius: ${rem(66)};
   box-shadow: inset 0 0 0 0.4rem
-      ${props => darken(0.04, props.backgroundColor || props.theme.green)},
+      ${props => darken(0.04, props.backgroundcolor || props.theme.green)},
     0 0.4rem 0 0 #e7e6e4;
-  background-color: ${props => props.backgroundColor || props.theme.green};
+  background-color: ${props => props.backgroundcolor || props.theme.green};
   color: ${props => props.color || '#fff'};
   transition: all 0.2s cubic-bezier(0.06, 0.67, 0.37, 0.99);
   font-weight: 500;
@@ -74,7 +74,7 @@ const LinkTag = styled.span`
 
   &:hover {
     box-shadow: inset 0 0 0 0.4rem
-        ${props => darken(0.06, props.backgroundColor || props.theme.green)},
+        ${props => darken(0.06, props.backgroundcolor || props.theme.green)},
       0 0.4rem 0 0 #e7e6e4;
     transform: translateY(-0.2rem);
   }

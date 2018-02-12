@@ -1,54 +1,17 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
-import styled from 'styled-components';
-import { Button, H1, Container, Input, rem } from '../common';
-import PlacesAutocomplete from '../../utils/GoogleAutocomplete';
+import { reduxForm } from 'redux-form';
+import { H1 } from '../common';
+
+import AddPropertyForm from './AddPropertyForm';
 
 const AddProperty = props => {
-  const { handleSubmit } = props;
-  const autoCompleteCb = address => {
-    console.log('address', address);
-  };
   return (
-    <Container>
+    <div>
       <H1>What is the address of your property?</H1>
-      <Form onSubmit={handleSubmit}>
-        <Field
-          className="form-input"
-          name="property"
-          cb={autoCompleteCb}
-          component={PlacesAutocomplete}
-          placeholder="enter property address"
-        />
-
-        <Field
-          className="form-input"
-          name="unitNumber"
-          label="Unit number"
-          component={Input}
-          placeholder="enter unit number"
-        />
-        <div className="center-xs">
-          <Button className="addPropertyBtn" type="submit">
-            Next
-          </Button>
-        </div>
-      </Form>
-    </Container>
+      <AddPropertyForm {...props} nextBtnText="Next" />
+    </div>
   );
 };
-
-const Form = styled.form`
-  margin-top: ${rem(20)};
-
-  &.form-input {
-    margin-top: ${rem(20)};
-  }
-
-  &.addPropertyBtn {
-    margin-top: ${rem(20)};
-  }
-`;
 
 export default reduxForm({
   form: 'getStarted',

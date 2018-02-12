@@ -5,11 +5,12 @@ import { reduxForm } from 'redux-form';
 import * as actions from '../actions';
 // import styled from 'styled-components';
 
-import { Container, H1 } from '../components/common';
+import { Container } from '../components/common';
 // import { Row, Col } from 'react-flexbox-grid';
-// import GoogleAutocomplete from '../utils/GoogleAutocomplete';
 
 import AddProperty from '../components/get_started/AddProperty';
+import ChoosePlateform from '../components/get_started/ChoosePlateform';
+import SignupGetStarted from '../components/get_started/SignupGetStarted';
 
 class GetStarted extends Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class GetStarted extends Component {
     this.nextPage = this.nextPage.bind(this);
     this.previousPage = this.previousPage.bind(this);
     this.onSubmitForm = this.onSubmitForm.bind(this);
+    this.renderPage = this.renderPage.bind(this);
     this.state = {
       page: 1
     };
@@ -29,19 +31,39 @@ class GetStarted extends Component {
     this.setState({ page: this.state.page - 1 });
   }
   onSubmitForm(values) {
+    const { history, localSignup } = this.props;
     console.log('onSubmitForm', values);
+    //   localSignup(values, history);
+    //
+    //   // const { from } = this.props.location.state || { from: { pathname: '/' } };
+    //   // localSignup(values, history, from);
   }
+
+  renderPage() {
+    const { page } = this.state;
+    switch (page) {
+      case 1:
+        return <AddProperty onSubmit={this.nextPage} />;
+      case 2:
+        return (
+          <ChoosePlateform
+            // previousPage={this.previousPage}
+            onSubmit={this.nextPage}
+          />
+        );
+      case 3:
+        return (
+          <SignupGetStarted
+            // previousPage={this.previousPage}
+            onSubmit={this.onSubmitForm}
+          />
+        );
+      default:
+    }
+  }
+
   render() {
-    return (
-      <Container>
-        <H1>Get Started</H1>
-        <AddProperty
-          previousPage={this.previousPage}
-          onSubmit={this.nextPage}
-          // onSubmit={this.onSubmitForm}
-        />
-      </Container>
-    );
+    return <Container>{this.renderPage()}</Container>;
   }
 }
 
