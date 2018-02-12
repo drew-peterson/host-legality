@@ -29,20 +29,20 @@ class Login extends Component {
         <H1>Welcome back!</H1>
         <Row center="xs">
           <Col xs={12} md={4}>
-            <Button
+            {/* <Button
               style={styles.btnStyle}
               link
               href="/auth/facebook"
-              backgroundColor="#264187"
+              backgroundcolor="#264187"
             >
               Facebook
-            </Button>
+            </Button> */}
             <Button
               style={styles.btnStyle}
               link
               href="/auth/google"
               color="black"
-              backgroundColor="white"
+              backgroundcolor="white"
             >
               Google
             </Button>

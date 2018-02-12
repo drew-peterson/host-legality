@@ -6,3 +6,4 @@ export * from './H1';
 export * from './H2';
 export * from './Subheader';
 export * from './RadioBtnGroup';
+export * from './media';

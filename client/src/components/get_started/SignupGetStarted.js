@@ -25,7 +25,7 @@ class SignupGetStarted extends Component {
             </Button> */}
             <Button
               style={styles.btnStyle}
-              // href="/auth/google"
+              href="/auth/google"
               backgroundcolor="white"
               color="black"
             >

@@ -1,11 +1,9 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const bcrypt = require("bcrypt-nodejs");
+const bcrypt = require('bcrypt-nodejs');
 
 const userSchema = new Schema({
   _oAuthId: String,
-  firstName: String,
-  lastName: String,
   password: String,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
@@ -22,13 +20,13 @@ const userSchema = new Schema({
         const re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // validate real email...
         return re.test(email);
       },
-      message: "{VALUE} is not a valid email address"
+      message: '{VALUE} is not a valid email address'
     }
-  },
+  }
 });
 
 //On save hook, encrypt password
-userSchema.pre("save", function(next) {
+userSchema.pre('save', function(next) {
   const user = this;
   if (!user.password) {
     next();
@@ -60,4 +58,4 @@ userSchema.methods.comparePassword = function(canidatePassword, cb) {
   });
 };
 
-mongoose.model("user", userSchema);
+mongoose.model('user', userSchema);

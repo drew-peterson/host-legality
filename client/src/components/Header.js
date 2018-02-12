@@ -21,8 +21,8 @@ class Header extends Component {
         ];
       default:
         return [
-          <Link to="/protected" key="1">
-            Protected
+          <Link to="/properties" key="1">
+            properties
           </Link>,
 
           <a href="/api/logout" key="2">

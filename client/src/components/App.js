@@ -8,6 +8,7 @@ import Header from './Header';
 import Landing from '../screens/Landing';
 import Properties from '../screens/Properties';
 import GetStarted from '../screens/GetStarted';
+import PaymentPlan from '../screens/PaymentPlan';
 
 // AUTH
 import Login from '../screens/Login';
@@ -33,10 +34,11 @@ class App extends Component {
             <Route exact path="/" component={Landing} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route path="/protected" component={requireAuth(Protected)} />
             <Route path="/forgotPassword" component={ForgotPassword} />
-            <Route path="/properties" component={Properties} />
             <Route path="/get-started" component={GetStarted} />
+            <Route path="/protected" component={requireAuth(Protected)} />
+            <Route path="/properties" component={requireAuth(Properties)} />
+            <Route path="/paymentPlan" component={requireAuth(PaymentPlan)} />
             <Route path="/resetPassword/:token" component={ResetPassword} />
             <Route component={NoMatch} />
           </Switch>
