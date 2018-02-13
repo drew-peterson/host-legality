@@ -21,8 +21,8 @@ class Header extends Component {
         ];
       default:
         return [
-          <Link to="/properties" key="1">
-            properties
+          <Link style={{ marginRight: '15px' }} to="/dashboard" key="1">
+            dashboard
           </Link>,
 
           <a href="/api/logout" key="2">
@@ -73,6 +73,10 @@ const GetStartedBtn = styled.span`
     width: ${rem(174)};
   }
 `;
+
+const styles = {
+  linkStyle: {}
+};
 
 const mapStateToProps = ({ auth }) => {
   return { auth };

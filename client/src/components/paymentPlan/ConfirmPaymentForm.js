@@ -4,25 +4,40 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import PaymentPlanItem from './PaymentPlanItem';
+import StripePayment from '../shared/StripePayment';
 
 class ConfirmPaymentForm extends Component {
   state = {
-    card: null
+    card: null,
+    showStipe: false
   };
   componentDidMount() {
     const { planType, plans } = this.props;
-    console.log(planType, plans);
     this.setState({ card: plans[planType] });
+  }
+
+  renderStripePayment() {
+    const { card } = this.state;
+    if (card) {
+      const { amount, description } = card;
+      return (
+        <StripePayment
+          btnText="Continue"
+          description={description}
+          amount={amount}
+        />
+      );
+    }
   }
 
   render() {
     const { handleSubmit, plans } = this.props;
+    const { card, showStripe } = this.state;
     return (
       <Form onSubmit={handleSubmit}>
-        <PaymentPlanItem {...this.state.card} />
-        <div>
-          <button type="submit">Pay</button>
-        </div>
+        <PaymentPlanItem {...card} />
+
+        <div>{this.renderStripePayment()}</div>
       </Form>
     );
   }

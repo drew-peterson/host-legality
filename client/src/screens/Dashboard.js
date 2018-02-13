@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { Container, H1, rem, Button } from '../components/common';
 import { Row, Col } from 'react-flexbox-grid';
 
-class Properties extends Component {
+class Dashboard extends Component {
   renderPropertyList() {
     const properties = [
       {
@@ -44,7 +44,7 @@ class Properties extends Component {
   render() {
     return (
       <Container>
-        <H1>My Properties</H1>
+        <H1>My Dashboard</H1>
         <Row middle="xs">
           <Col xs={12}>{this.renderPropertyList()}</Col>
         </Row>
@@ -71,4 +71,4 @@ const PropertyStatus = styled.span`
 function mapStateToProps(state) {
   return {};
 }
-export default connect(mapStateToProps, actions)(Properties);
+export default connect(mapStateToProps, actions)(Dashboard);

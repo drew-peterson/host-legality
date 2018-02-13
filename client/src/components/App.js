@@ -6,7 +6,7 @@ import * as actions from '../actions';
 
 import Header from './Header';
 import Landing from '../screens/Landing';
-import Properties from '../screens/Properties';
+import Dashboard from '../screens/Dashboard';
 import GetStarted from '../screens/GetStarted';
 import PaymentPlan from '../screens/PaymentPlan';
 
@@ -37,7 +37,7 @@ class App extends Component {
             <Route path="/forgotPassword" component={ForgotPassword} />
             <Route path="/get-started" component={GetStarted} />
             <Route path="/protected" component={requireAuth(Protected)} />
-            <Route path="/properties" component={requireAuth(Properties)} />
+            <Route path="/dashboard" component={requireAuth(Dashboard)} />
             <Route path="/paymentPlan" component={requireAuth(PaymentPlan)} />
             <Route path="/resetPassword/:token" component={ResetPassword} />
             <Route component={NoMatch} />
