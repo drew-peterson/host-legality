@@ -7,10 +7,6 @@ const userSchema = new Schema({
   password: String,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
-  credits: {
-    type: Number,
-    default: 0
-  },
   email: {
     type: String,
     unique: true,

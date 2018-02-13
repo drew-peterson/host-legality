@@ -11,20 +11,28 @@ class Dashboard extends Component {
   renderPropertyList() {
     const properties = [
       {
-        address: 'address here',
-        status: 'need action'
+        address: 'address here', // google formatted address
+        status: 'need action',
+        googleData: {}, // google data
+        host: 'airBandB' // host id...
       },
       {
-        address: 'address here',
-        status: 'need action'
+        address: 'address here', // google formatted address
+        status: 'need action',
+        googleData: {}, // google data
+        host: 'airBandB' // host id...
       },
       {
-        address: 'address here',
-        status: 'need action'
+        address: 'address here', // google formatted address
+        status: 'need action',
+        googleData: {}, // google data
+        host: 'airBandB' // host id...
       },
       {
-        address: 'address here',
-        status: 'need action'
+        address: 'address here', // google formatted address
+        status: 'need action',
+        googleData: {}, // google data
+        host: 'airBandB' // host id...
       }
     ];
 
