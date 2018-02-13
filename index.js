@@ -7,6 +7,7 @@ const keys = require('./config/keys');
 
 // Models
 require('./models/User'); // require mongoose models -- model has to exist first before passport can use it
+require('./models/Property');
 require('./services/passport'); // make sure passport is ran...
 
 const handleErrors = require('./middlewares/errors');
@@ -31,6 +32,7 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app); // bring in authRoutes function and call it with app
 require('./routes/billingRoutes')(app);
+require('./routes/propertyRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assesset (main.js, main.css) files

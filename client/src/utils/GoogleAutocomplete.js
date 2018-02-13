@@ -1,7 +1,7 @@
 import React from 'react';
 import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng
+  geocodeByAddress
+  // getLatLng
 } from 'react-places-autocomplete';
 
 import { change } from 'redux-form';
@@ -17,11 +17,12 @@ class GooleAutoComplete extends React.Component {
   async onSelect(address) {
     this.setState({ address });
     const { meta: { dispatch, form }, input: { name } } = this.props;
-    const gAddress = await geocodeByAddress(address);
-    const latLng = await getLatLng(gAddress[0]);
+    const googleData = await geocodeByAddress(address);
+    // const latLng = await getLatLng(gAddress[0]);
 
     // save property on reduxForm
-    dispatch(change(form, name, { gAddress: gAddress[0], latLng }));
+    // dispatch(change(form, name, { gAddress: gAddress[0], latLng }));
+    dispatch(change(form, name, googleData[0]));
   }
 
   render() {

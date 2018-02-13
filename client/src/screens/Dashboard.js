@@ -8,46 +8,29 @@ import { Container, H1, rem, Button } from '../components/common';
 import { Row, Col } from 'react-flexbox-grid';
 
 class Dashboard extends Component {
-  renderPropertyList() {
-    const properties = [
-      {
-        address: 'address here', // google formatted address
-        status: 'need action',
-        googleData: {}, // google data
-        host: 'airBandB' // host id...
-      },
-      {
-        address: 'address here', // google formatted address
-        status: 'need action',
-        googleData: {}, // google data
-        host: 'airBandB' // host id...
-      },
-      {
-        address: 'address here', // google formatted address
-        status: 'need action',
-        googleData: {}, // google data
-        host: 'airBandB' // host id...
-      },
-      {
-        address: 'address here', // google formatted address
-        status: 'need action',
-        googleData: {}, // google data
-        host: 'airBandB' // host id...
-      }
-    ];
+  componentDidMount() {
+    const { fetchMyProperties } = this.props;
+    fetchMyProperties();
+  }
 
-    return _.map(properties, (property, idx) => {
-      return (
-        <Row key={idx}>
-          <Col xs={8}>
-            <PropertyItem>{property.address}</PropertyItem>
-          </Col>
-          <Col xs={4}>
-            <PropertyStatus>{property.status}</PropertyStatus>
-          </Col>
-        </Row>
-      );
-    });
+  renderPropertyList() {
+    const { properties } = this.props;
+    if (properties) {
+      return _.map(properties, (property, idx) => {
+        return (
+          <Row key={idx}>
+            <Col xs={8}>
+              <PropertyItem>{property.address}</PropertyItem>
+            </Col>
+            <Col xs={4}>
+              <PropertyStatus>{property.status}</PropertyStatus>
+            </Col>
+          </Row>
+        );
+      });
+    }
+
+    return <div>loading...</div>;
   }
   render() {
     return (
@@ -76,7 +59,7 @@ const PropertyStatus = styled.span`
   text-align: right;
 `;
 
-function mapStateToProps(state) {
-  return {};
+function mapStateToProps({ properties }) {
+  return { properties };
 }
 export default connect(mapStateToProps, actions)(Dashboard);

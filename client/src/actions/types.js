@@ -1,3 +1,5 @@
-export const FETCH_USER = "FETCH_USER";
+export const FETCH_USER = 'FETCH_USER';
 // export const SERVER_ERROR = "SERVER_ERROR";
-export const CLIENT_ERRORS = "CLIENT_ERRORS";
+export const CLIENT_ERRORS = 'CLIENT_ERRORS';
+export const FETCH_MY_PROPERTIES = 'FETCH_MY_PROPERTIES';
+export const SAVE_PROPERTY = 'SAVE_PROPERTY';

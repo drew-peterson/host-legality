@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 import { Container } from '../components/common';
 
 import AddProperty from '../components/property/AddProperty';
@@ -25,7 +27,9 @@ class NewProperty extends Component {
     this.setState({ page: this.state.page - 1 });
   }
   onSubmitForm(values) {
-    console.log('onSubmitForm', values);
+    const { saveProperty, history } = this.props;
+    // console.log('onSubmitForm', values, this.props);
+    saveProperty(values, history);
   }
 
   renderPage() {
@@ -44,9 +48,10 @@ class NewProperty extends Component {
     return <Container>{this.renderPage()}</Container>;
   }
 }
-
-export default reduxForm({
+NewProperty = reduxForm({
   form: 'NewProperty',
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true // <------ unregister fields on unmount
 })(NewProperty);
+
+export default connect(null, actions)(NewProperty);

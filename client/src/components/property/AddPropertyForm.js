@@ -10,7 +10,7 @@ const AddPropertyForm = props => {
     <Form onSubmit={handleSubmit}>
       <Field
         className="form-input"
-        name="property"
+        name="googleData"
         component={PlacesAutocomplete}
         placeholder="enter property address"
       />
