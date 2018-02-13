@@ -52,7 +52,7 @@ const Landing = props => {
               </Subheader>
             </Col>
             <Col xs={12} className="center-xs">
-              <Button style={styles.header1Btn} to="/get-started">
+              <Button style={styles.header1Btn} to="/signup">
                 Get started
               </Button>
             </Col>

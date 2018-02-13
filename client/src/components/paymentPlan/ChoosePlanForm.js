@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 
 import PaymentPlanItem from './PaymentPlanItem';
 import { Row, Col } from 'react-flexbox-grid';
-import { rem, Button } from '../common';
+import { rem } from '../common';
 
 const ChoosePlanForm = props => {
   const { handleSubmit, plans } = props;

@@ -31,8 +31,8 @@ class ConfirmPaymentForm extends Component {
   }
 
   render() {
-    const { handleSubmit, plans } = this.props;
-    const { card, showStripe } = this.state;
+    const { handleSubmit } = this.props;
+    const { card } = this.state;
     return (
       <Form onSubmit={handleSubmit}>
         <PaymentPlanItem {...card} />

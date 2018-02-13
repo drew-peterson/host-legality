@@ -49,7 +49,7 @@ class Dashboard extends Component {
           <Col xs={12}>{this.renderPropertyList()}</Col>
         </Row>
 
-        <Button to="/get-started">Add a new property</Button>
+        <Button to="/addProperty">Add a new property</Button>
       </Container>
     );
   }

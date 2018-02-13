@@ -4,21 +4,29 @@ import { rem, darken } from 'polished';
 import { Link } from 'react-router-dom';
 
 const Button = props => {
-  const { children, to, href } = props;
+  const { children, to, href, backgroundcolor, color } = props;
   if (to) {
     return (
-      <Link {...props} style={{ textDecoration: 'none' }}>
-        <LinkTag>{children}</LinkTag>
+      <Link to={to} style={{ textDecoration: 'none' }}>
+        <LinkTag backgroundcolor={backgroundcolor} color={color}>
+          {children}
+        </LinkTag>
       </Link>
     );
   } else if (href) {
     return (
-      <a {...props} style={{ textDecoration: 'none' }}>
-        <LinkTag>{children}</LinkTag>
+      <a href={href} style={{ textDecoration: 'none' }}>
+        <LinkTag backgroundcolor={backgroundcolor} color={color}>
+          {children}
+        </LinkTag>
       </a>
     );
   }
-  return <Btn {...props}>{children}</Btn>;
+  return (
+    <Btn backgroundcolor={backgroundcolor} color={color}>
+      {children}
+    </Btn>
+  );
 };
 
 const Btn = styled.button`
@@ -42,7 +50,6 @@ const Btn = styled.button`
   vertical-align: top;
   text-decoration: none;
   cursor: pointer;
-
   &:hover {
     box-shadow: inset 0 0 0 0.4rem
         ${props => darken(0.06, props.backgroundcolor || props.theme.green)},

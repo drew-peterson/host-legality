@@ -15,7 +15,7 @@ class Header extends Component {
           <Link key="1" to="/login">
             Sign in
           </Link>,
-          <Link to="/get-started" key="2">
+          <Link to="/signup" key="2">
             <GetStartedBtn>Get started</GetStartedBtn>
           </Link>
         ];
@@ -74,9 +74,9 @@ const GetStartedBtn = styled.span`
   }
 `;
 
-const styles = {
-  linkStyle: {}
-};
+// const styles = {
+//   linkStyle: {}
+// };
 
 const mapStateToProps = ({ auth }) => {
   return { auth };

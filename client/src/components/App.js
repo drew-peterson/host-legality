@@ -7,8 +7,8 @@ import * as actions from '../actions';
 import Header from './Header';
 import Landing from '../screens/Landing';
 import Dashboard from '../screens/Dashboard';
-import GetStarted from '../screens/GetStarted';
 import PaymentPlan from '../screens/PaymentPlan';
+import NewProperty from '../screens/NewProperty';
 
 // AUTH
 import Login from '../screens/Login';
@@ -21,7 +21,6 @@ class App extends Component {
   // preferred location for intial ajax request w/ new react
   // componentDidMount() {
   componentWillMount() {
-    console.log('fetch user');
     this.props.fetchUser(); // check auth...
   }
 
@@ -35,10 +34,9 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/forgotPassword" component={ForgotPassword} />
-            <Route path="/get-started" component={GetStarted} />
-            <Route path="/protected" component={requireAuth(Protected)} />
             <Route path="/dashboard" component={requireAuth(Dashboard)} />
             <Route path="/paymentPlan" component={requireAuth(PaymentPlan)} />
+            <Route path="/addProperty" component={requireAuth(NewProperty)} />
             <Route path="/resetPassword/:token" component={ResetPassword} />
             <Route component={NoMatch} />
           </Switch>
@@ -56,15 +54,5 @@ const NoMatch = ({ location }) => (
     </h3>
   </div>
 );
-
-class Protected extends Component {
-  render() {
-    return (
-      <div>
-        <h3>Protected Route here...</h3>
-      </div>
-    );
-  }
-}
 
 export default connect(null, actions)(App);

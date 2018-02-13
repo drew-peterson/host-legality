@@ -10,7 +10,7 @@ const ChoosePlateform = props => {
     <div>
       <H1>Which platform are you using for this property?</H1>
 
-      <HostingPlateformForm {...props} btnText="Next" name="host" />
+      <HostingPlateformForm {...props} btnText="Submit" name="host" />
     </div>
   );
 };

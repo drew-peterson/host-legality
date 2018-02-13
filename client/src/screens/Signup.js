@@ -17,24 +17,22 @@ class Signup extends Component {
           <Col xs={12} md={4}>
             <Button
               style={styles.btnStyle}
-              link
               href="/auth/facebook"
-              backgroundColor="#264187"
+              backgroundcolor="#264187"
             >
               Facebook
             </Button>
             <Button
               style={styles.btnStyle}
-              link
               href="/auth/google"
-              backgroundColor="white"
+              backgroundcolor="white"
               color="black"
             >
               Google
             </Button>
 
             <Button
-              style={styles.btnStyle}
+              // style={styles.btnStyle}
               onClick={() => this.setState({ showEmail: !showEmail })}
             >
               Sign in with email
