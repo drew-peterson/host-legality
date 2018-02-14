@@ -19,11 +19,11 @@ const PaymentPlanItem = props => {
       <Description>{description}</Description>
 
       {handleSubmit && (
-        <Label>
+        <BtnWrap>
           <Button type="button" onClick={handleClick}>
             Continue
           </Button>
-        </Label>
+        </BtnWrap>
       )}
     </Card>
   );
@@ -64,7 +64,7 @@ const Description = styled.p`
   max-width: ${rem(255)};
   margin-top: ${rem(25)};
 `;
-const Label = styled.label`
+const BtnWrap = styled.div`
   margin-top: ${rem(100)};
 `;
 const SelectTag = styled.div`

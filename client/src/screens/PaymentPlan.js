@@ -49,7 +49,7 @@ class PaymentPlan extends Component {
           <ConfirmPaymentForm onSubmit={this.onSubmitForm} plans={this.Plans} />
         );
       default:
-        return <ChoosePlanForm onSubmit={this.nextPage} />;
+        return <ChoosePlanForm onSubmit={this.nextPage} plans={this.Plans} />;
     }
   }
 
