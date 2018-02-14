@@ -7,7 +7,8 @@ import * as actions from '../actions';
 import Header from './Header';
 import Landing from '../screens/Landing';
 import DashboardScreen from '../screens/DashboardScreen';
-import PaymentPlan from '../screens/PaymentPlan';
+// import PaymentPlan from '../screens/PaymentPlan';
+import PaymentPlanScreen from '../screens/PaymentPlanScreen';
 import AddPropertyScreen from '../screens/AddPropertyScreen';
 
 // AUTH
@@ -36,9 +37,13 @@ class App extends Component {
             <Route path="/signup" component={SignupScreen} />
             <Route path="/forgotPassword" component={ForgotPassword} />
             <Route path="/dashboard" component={requireAuth(DashboardScreen)} />
-            <Route
+            {/* <Route
               path="/paymentPlan/:propertyId"
               component={requireAuth(PaymentPlan)}
+            /> */}
+            <Route
+              path="/paymentPlan/:propertyId"
+              component={requireAuth(PaymentPlanScreen)}
             />
             <Route
               path="/addProperty"

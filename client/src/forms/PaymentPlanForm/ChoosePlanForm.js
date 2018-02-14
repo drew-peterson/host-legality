@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import _ from 'lodash';
 import { reduxForm } from 'redux-form';
 
-import PaymentPlanItem from './PaymentPlanItem';
 import { Row, Col } from 'react-flexbox-grid';
-import { rem } from '../common';
+import PaymentPlanItem from '../../components/paymentPlan/PaymentPlanItem';
+import { rem } from '../../components/common';
 
 const ChoosePlanForm = props => {
   const { handleSubmit, plans } = props;
@@ -40,7 +40,6 @@ const Form = styled.form`
 `;
 
 export default reduxForm({
-  form: 'paymentPlan',
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true // <------ unregister fields on unmount
 })(ChoosePlanForm);
