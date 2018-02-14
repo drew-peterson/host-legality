@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 import AuthForm from '../forms/AuthForm';
 
