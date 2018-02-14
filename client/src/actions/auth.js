@@ -21,6 +21,7 @@ export const localSignup = (
         type: FETCH_USER,
         payload: user
       });
+      history.push('/addProperty');
     }
   } catch ({ response }) {
     dispatch({

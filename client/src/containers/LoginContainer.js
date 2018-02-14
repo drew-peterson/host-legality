@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import * as actions from '../actions';
-import LoginForm from '../forms/LoginForm';
+import AuthForm from '../forms/AuthForm';
 
 // configuation and state for loginForm including form name!
 
@@ -26,7 +26,14 @@ class LoginContainer extends Component {
   }
 
   render() {
-    return <LoginForm onSubmit={this.onFormSubmit.bind(this)} form="login" />;
+    return (
+      <AuthForm
+        onSubmit={this.onFormSubmit.bind(this)}
+        form="login"
+        btnText="Login"
+        oAuthType="login"
+      />
+    );
   }
 }
 

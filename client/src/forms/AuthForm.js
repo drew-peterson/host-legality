@@ -7,16 +7,16 @@ import styled from 'styled-components';
 import * as actions from '../actions';
 import { Input, Button, rem } from '../components/common';
 
-class LoginForm extends Component {
+class AuthForm extends Component {
   render() {
-    const { handleSubmit, errors } = this.props;
+    const { handleSubmit, errors, btnText, oAuthType } = this.props;
 
     return (
       <LoginWrap>
         <Button
           style={styles.btnStyle}
           link
-          href="/auth/google?oAuthType=login"
+          href={`/auth/google?oAuthType=${oAuthType}`}
           color="black"
           backgroundcolor="white"
         >
@@ -38,7 +38,7 @@ class LoginForm extends Component {
             placeholder="enter your password"
           />
           <Button style={styles.btnStyle} type="submit" name="action">
-            Login
+            {btnText}
           </Button>
 
           {errors && (
@@ -86,6 +86,6 @@ function mapStateToProps({ errors }) {
 }
 
 // form name passed in props
-LoginForm = reduxForm({})(LoginForm);
+AuthForm = reduxForm({})(AuthForm);
 
-export default connect(mapStateToProps, actions)(withRouter(LoginForm));
+export default connect(mapStateToProps, actions)(withRouter(AuthForm));
