@@ -4,29 +4,21 @@ import { rem, darken } from 'polished';
 import { Link } from 'react-router-dom';
 
 const Button = props => {
-  const { children, to, href, backgroundcolor, color } = props;
+  const { children, to, href } = props;
   if (to) {
     return (
       <Link to={to} style={{ textDecoration: 'none' }}>
-        <LinkTag backgroundcolor={backgroundcolor} color={color}>
-          {children}
-        </LinkTag>
+        <LinkTag {...props}>{children}</LinkTag>
       </Link>
     );
   } else if (href) {
     return (
       <a href={href} style={{ textDecoration: 'none' }}>
-        <LinkTag backgroundcolor={backgroundcolor} color={color}>
-          {children}
-        </LinkTag>
+        <LinkTag {...props}>{children}</LinkTag>
       </a>
     );
   }
-  return (
-    <Btn backgroundcolor={backgroundcolor} color={color}>
-      {children}
-    </Btn>
-  );
+  return <Btn {...props}>{children}</Btn>;
 };
 
 const Btn = styled.button`
