@@ -8,14 +8,25 @@ const facebookOAuthCb = passportTypes.facebookOAuthCb;
 const createLocalUser = require('../middlewares/createLocalUser');
 const password = require('../middlewares/password');
 
+const oAuthType = (req, res, next) => {
+  // help with redirect for oAuth signup / login
+  req.app.set('oAuthType', req.query.oAuthType);
+  next();
+};
+
 module.exports = app => {
   // GOOGLE ------------------------------------------------------
-  app.get('/auth/google', googleOAuth);
+  app.get('/auth/google', oAuthType, googleOAuth);
 
   // redirect to specific route after passport strategy is model getting user model
   app.get('/auth/google/callback', googleOAuthCb, (req, res) => {
-    console.log('GOOGLE', req.user);
-    res.redirect('/login');
+    // console.log('GOOGLE', req.user);
+    const oAuthType = app.get('oAuthType');
+    console.log('oAuthType', oAuthType);
+    if (oAuthType === 'login') {
+      return res.redirect('/login');
+    }
+    return res.redirect('/addProperty');
   });
 
   // FACEBOOK ------------------------------------------------------

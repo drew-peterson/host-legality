@@ -15,13 +15,13 @@ class Signup extends Component {
         <H1>Get Started!</H1>
         <Row center="xs">
           <Col xs={12} md={4}>
-            <Button
+            {/* <Button
               style={styles.btnStyle}
               href="/auth/facebook"
               backgroundcolor="#264187"
             >
               Facebook
-            </Button>
+            </Button> */}
             <Button
               style={styles.btnStyle}
               href="/auth/google"

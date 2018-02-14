@@ -9,8 +9,8 @@ import { Row, Col } from 'react-flexbox-grid';
 
 class Dashboard extends Component {
   componentDidMount() {
-    // const { fetchMyProperties } = this.props;
-    // fetchMyProperties();
+    const { fetchMyProperties } = this.props;
+    fetchMyProperties();
   }
 
   renderPropertyList() {

@@ -40,7 +40,7 @@ class Login extends Component {
             <Button
               style={styles.btnStyle}
               link
-              href="/auth/google"
+              href="/auth/google?oAuthType=login"
               color="black"
               backgroundcolor="white"
             >
