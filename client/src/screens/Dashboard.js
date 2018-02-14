@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import * as actions from '../actions';
 import styled from 'styled-components';
 
 import { Container, H1, rem, Button } from '../components/common';
-import { Row, Col } from 'react-flexbox-grid';
+// import { Row, Col } from 'react-flexbox-grid';
 
 class Dashboard extends Component {
   componentDidMount() {
@@ -16,16 +17,18 @@ class Dashboard extends Component {
   renderPropertyList() {
     const { properties } = this.props;
     if (properties) {
-      return _.map(properties, (property, idx) => {
+      return _.map(properties, property => {
         return (
-          <Row key={idx}>
-            <Col xs={8}>
+          <Link
+            key={property._id}
+            style={styles.propertyItemLink}
+            to={`/paymentPlan/${property._id}`}
+          >
+            <PropertyWrap>
               <PropertyItem>{property.address}</PropertyItem>
-            </Col>
-            <Col xs={4}>
               <PropertyStatus>{property.status}</PropertyStatus>
-            </Col>
-          </Row>
+            </PropertyWrap>
+          </Link>
         );
       });
     }
@@ -36,28 +39,51 @@ class Dashboard extends Component {
     return (
       <Container>
         <H1>My Dashboard</H1>
-        <Row middle="xs">
-          <Col xs={12}>{this.renderPropertyList()}</Col>
-        </Row>
 
-        <Button to="/addProperty">Add a new property</Button>
+        <div style={{ marginTop: rem(25) }}>{this.renderPropertyList()}</div>
+        <BtnWrap>
+          <Button to="/addProperty">Add a new property</Button>
+        </BtnWrap>
       </Container>
     );
   }
 }
 
 const PropertyItem = styled.div`
-  font-size: $(rem(24));
-  padding: ${rem(30)}
+  font-size: ${rem(24)};
+  padding: ${rem(30)};
   border: 3px solid #bdbdbd;
   border-radius: ${rem(10)};
 `;
 
 const PropertyStatus = styled.span`
   font-weight: bold;
-  font-size: ${rem(36)};
+  font-size: ${rem(25)};
   text-align: right;
 `;
+
+const PropertyWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.2s background-color;
+
+  &:hover {
+    background-color: #efefef;
+  }
+`;
+
+const BtnWrap = styled.div`
+  margin-top: ${rem(25)};
+`;
+
+const styles = {
+  propertyItemLink: {
+    textDecoration: 'none',
+    color: '#828282'
+  }
+};
 
 function mapStateToProps({ properties }) {
   return { properties };

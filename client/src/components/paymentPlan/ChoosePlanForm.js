@@ -10,7 +10,6 @@ import { rem } from '../common';
 
 const ChoosePlanForm = props => {
   const { handleSubmit, plans } = props;
-  console.log('plans A', plans);
   const renderPlanItem = props => {
     return (
       <Row center="xs" between="md">

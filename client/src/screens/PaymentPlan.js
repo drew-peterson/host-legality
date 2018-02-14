@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { Container, H1, rem } from '../components/common';
+
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import { Container, H1, rem, Subheader } from '../components/common';
 import { reduxForm } from 'redux-form';
 
 import ChoosePlanForm from '../components/paymentPlan/ChoosePlanForm';
@@ -26,8 +30,17 @@ class PaymentPlan extends Component {
     this.setState({ page: this.state.page - 1 });
   }
 
+  renderBackBtn() {
+    const { page } = this.state;
+    if (page > 1) {
+      return <button onClick={this.previousPage}>BACK</button>;
+    }
+    return <Link to="/dashboard">BACK</Link>;
+  }
+
   renderPage() {
     const { page } = this.state;
+
     switch (page) {
       case 1:
         return <ChoosePlanForm onSubmit={this.nextPage} plans={this.Plans} />;
@@ -41,14 +54,16 @@ class PaymentPlan extends Component {
   }
 
   render() {
+    const { property } = this.props;
     return (
       <Container>
-        {this.state.page > 1 && (
-          <button onClick={this.previousPage}>BACK</button>
+        {this.renderBackBtn()}
+        <H1 style={styles.headerStyle}>Which package would you like for:</H1>
+        {property && (
+          <Subheader style={styles.addressSubHeaderStyle}>
+            {property.address}
+          </Subheader>
         )}
-        <H1 style={styles.headerStyle}>
-          Which package would you like for this Airbnb property?
-        </H1>
         {this.renderPage()}
       </Container>
     );
@@ -77,11 +92,21 @@ const styles = {
   headerStyle: {
     maxWidth: rem(632),
     margin: '0 auto'
+  },
+  addressSubHeaderStyle: {
+    textAlign: 'center'
   }
 };
 
-export default reduxForm({
+PaymentPlan = reduxForm({
   form: 'paymentPlan',
   destroyOnUnmount: false, // <------ preserve form data
   forceUnregisterOnUnmount: true // <------ unregister fields on unmount
 })(PaymentPlan);
+
+function mapStateToProps({ properties }, { match: { params } }) {
+  const { propertyId } = params;
+  return { property: properties[propertyId] };
+}
+
+export default connect(mapStateToProps)(PaymentPlan);

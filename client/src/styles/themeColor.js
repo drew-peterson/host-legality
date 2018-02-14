@@ -6,5 +6,6 @@ export const ThemeColor = {
   container: '#F1FAEE',
   error: '#E63946',
   white: '#fff',
-  green: '#11ad54'
+  green: '#11ad54',
+  textMain: '#828282'
 };

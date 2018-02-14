@@ -36,7 +36,10 @@ class App extends Component {
             <Route path="/signup" component={Signup} />
             <Route path="/forgotPassword" component={ForgotPassword} />
             <Route path="/dashboard" component={requireAuth(Dashboard)} />
-            <Route path="/paymentPlan" component={requireAuth(PaymentPlan)} />
+            <Route
+              path="/paymentPlan/:propertyId"
+              component={requireAuth(PaymentPlan)}
+            />
             <Route path="/addProperty" component={requireAuth(NewProperty)} />
             <Route path="/resetPassword/:token" component={ResetPassword} />
             <Route component={NoMatch} />
