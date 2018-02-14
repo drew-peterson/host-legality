@@ -23,6 +23,7 @@ const renderXsProps = ({
 };
 
 const ContainerWrap = styled.div`
+  position: relative;
   padding: ${props => renderXsProps};
   ${media.tablet`
     padding: ${props => renderProps};

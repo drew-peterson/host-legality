@@ -45,9 +45,29 @@ class NewProperty extends Component {
   }
 
   render() {
-    return <Container>{this.renderPage()}</Container>;
+    const { page } = this.state;
+    return (
+      <Container>
+        {page > 1 && (
+          <span style={styles.backButton} onClick={this.previousPage}>
+            BACK
+          </span>
+        )}
+
+        {this.renderPage()}
+      </Container>
+    );
   }
 }
+
+const styles = {
+  backButton: {
+    position: 'absolute',
+    top: 0,
+    left: 0
+  }
+};
+
 NewProperty = reduxForm({
   form: 'NewProperty',
   destroyOnUnmount: false, // <------ preserve form data
