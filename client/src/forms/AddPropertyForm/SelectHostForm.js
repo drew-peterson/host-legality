@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Field } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import _ from 'lodash';
 // import FontIcon from 'material-ui/FontIcon';
-import { Button, rem } from '../common';
+import { Button, rem } from '../../components/common';
 
-const HostingPlateformForm = props => {
-  const { handleSubmit, btnText, name } = props;
+const SelectHostForm = props => {
+  const { handleSubmit, btnText } = props;
   return (
     <Form onSubmit={handleSubmit}>
-      <Field name={name} component={plateformItem} />
+      <Field name="host" component={plateformItem} />
 
       <div className="center-xs">
         <Button className="addPropertyBtn" type="submit">
@@ -49,4 +49,7 @@ const Form = styled.form`
   }
 `;
 
-export default HostingPlateformForm;
+export default reduxForm({
+  destroyOnUnmount: false, // <------ preserve form data
+  forceUnregisterOnUnmount: true // <------ unregister fields on unmount
+})(SelectHostForm);

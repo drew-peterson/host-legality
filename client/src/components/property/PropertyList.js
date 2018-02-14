@@ -7,20 +7,20 @@ import { rem } from '../common';
 
 const PropertyList = props => {
   const { properties } = props;
-
   if (properties) {
     return _.map(properties, property => {
       return (
-        <Link
-          key={property._id}
-          style={styles.propertyItemLink}
-          to={`/paymentPlan/${property._id}`}
-        >
-          <PropertyWrap>
-            <PropertyItem>{property.address}</PropertyItem>
-            <PropertyStatus>{property.status}</PropertyStatus>
-          </PropertyWrap>
-        </Link>
+        <PropertyItem key={property._id}>
+          <Link
+            style={styles.propertyItemLink}
+            to={`/paymentPlan/${property._id}`}
+          >
+            <PropertyWrap>
+              <PropertyAddress>{property.address}</PropertyAddress>
+              <PropertyStatus>{property.status}</PropertyStatus>
+            </PropertyWrap>
+          </Link>
+        </PropertyItem>
       );
     });
   }
@@ -29,6 +29,10 @@ const PropertyList = props => {
 };
 
 const PropertyItem = styled.div`
+  margin-top: ${rem(30)};
+`;
+
+const PropertyAddress = styled.div`
   font-size: ${rem(24)};
   padding: ${rem(30)};
   border: 3px solid #bdbdbd;

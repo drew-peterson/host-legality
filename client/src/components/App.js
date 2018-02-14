@@ -8,7 +8,7 @@ import Header from './Header';
 import Landing from '../screens/Landing';
 import DashboardScreen from '../screens/DashboardScreen';
 import PaymentPlan from '../screens/PaymentPlan';
-import NewProperty from '../screens/NewProperty';
+import AddPropertyScreen from '../screens/AddPropertyScreen';
 
 // AUTH
 import LoginScreen from '../screens/LoginScreen';
@@ -40,7 +40,10 @@ class App extends Component {
               path="/paymentPlan/:propertyId"
               component={requireAuth(PaymentPlan)}
             />
-            <Route path="/addProperty" component={requireAuth(NewProperty)} />
+            <Route
+              path="/addProperty"
+              component={requireAuth(AddPropertyScreen)}
+            />
             <Route path="/resetPassword/:token" component={ResetPassword} />
             <Route component={NoMatch} />
           </Switch>
