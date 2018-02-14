@@ -15,7 +15,7 @@ class Login extends Component {
     // from is set in require_auth
     // get auth when app boots up first time or refresh...
     const { auth, history } = nextProps;
-    const from = localStorage.getItem('from') || '/';
+    const from = localStorage.getItem('from') || '/dashboard';
     if (auth) {
       history.push(from);
       localStorage.removeItem('from');

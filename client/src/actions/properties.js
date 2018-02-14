@@ -12,7 +12,8 @@ export const saveProperty = (values, history) => async dispatch => {
   history.push('/dashboard');
 };
 
-export const selectProperty = () => async dispatch => {
+export const selectProperty = propertyId => async dispatch => {
+  console.log('propertyId', propertyId);
   // const res = await axios.get('/api/current_user');
   // dispatch({ type: FETCH_USER, payload: res.data });
 };

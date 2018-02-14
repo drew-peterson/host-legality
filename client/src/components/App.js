@@ -22,6 +22,7 @@ class App extends Component {
   // componentDidMount() {
   componentWillMount() {
     this.props.fetchUser(); // check auth...
+    this.props.fetchMyProperties();
   }
 
   render() {
