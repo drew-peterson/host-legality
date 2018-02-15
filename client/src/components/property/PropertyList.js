@@ -12,19 +12,25 @@ const PropertyList = props => {
     paid: 2,
     complete: 3
   };
+  const statusRedirect = {
+    'pending-payment': '/paymentPlan',
+    paid: '/flow',
+    complete: '/complete'
+  };
   if (properties) {
     return _.chain(properties)
       .sortBy(p => sortOrder[p.status])
       .map(property => {
+        const { status, _id, address } = property;
         return (
-          <PropertyItem key={property._id}>
+          <PropertyItem key={_id}>
             <Link
               style={styles.propertyItemLink}
-              to={`/paymentPlan/${property._id}`}
+              to={`${statusRedirect[status]}/${_id}`}
             >
               <PropertyWrap>
-                <PropertyAddress>{property.address}</PropertyAddress>
-                <PropertyStatus>{property.status}</PropertyStatus>
+                <PropertyAddress>{address}</PropertyAddress>
+                <PropertyStatus>{status}</PropertyStatus>
               </PropertyWrap>
             </Link>
           </PropertyItem>
