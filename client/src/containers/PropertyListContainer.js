@@ -4,10 +4,10 @@ import * as actions from '../actions';
 import PropertyList from '../components/property/PropertyList';
 
 class PropertyListContainer extends Component {
-  componentDidMount() {
-    const { fetchMyProperties } = this.props;
-    fetchMyProperties();
-  }
+  // componentDidMount() {
+  //   const { fetchMyProperties } = this.props;
+  //   fetchMyProperties();
+  // }
 
   render() {
     const { properties } = this.props;

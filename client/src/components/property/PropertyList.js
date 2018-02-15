@@ -7,22 +7,30 @@ import { rem } from '../common';
 
 const PropertyList = props => {
   const { properties } = props;
+  const sortOrder = {
+    'pending-payment': 1,
+    paid: 2,
+    complete: 3
+  };
   if (properties) {
-    return _.map(properties, property => {
-      return (
-        <PropertyItem key={property._id}>
-          <Link
-            style={styles.propertyItemLink}
-            to={`/paymentPlan/${property._id}`}
-          >
-            <PropertyWrap>
-              <PropertyAddress>{property.address}</PropertyAddress>
-              <PropertyStatus>{property.status}</PropertyStatus>
-            </PropertyWrap>
-          </Link>
-        </PropertyItem>
-      );
-    });
+    return _.chain(properties)
+      .sortBy(p => sortOrder[p.status])
+      .map(property => {
+        return (
+          <PropertyItem key={property._id}>
+            <Link
+              style={styles.propertyItemLink}
+              to={`/paymentPlan/${property._id}`}
+            >
+              <PropertyWrap>
+                <PropertyAddress>{property.address}</PropertyAddress>
+                <PropertyStatus>{property.status}</PropertyStatus>
+              </PropertyWrap>
+            </Link>
+          </PropertyItem>
+        );
+      })
+      .value();
   }
 
   return <div>loading...</div>;

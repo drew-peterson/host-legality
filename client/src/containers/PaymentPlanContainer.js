@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { formValueSelector } from 'redux-form';
+import { withRouter } from 'react-router-dom';
 
 import PaymentPlanForm from '../forms/PaymentPlanForm';
 
@@ -16,10 +17,10 @@ class PaymentPlanContainer extends Component {
     };
   }
   onSubmitForm({ plan, token }) {
-    const { stripeHandleToken } = this.props;
+    const { makePaymentProperty, property, history } = this.props;
     const { amount, description } = this.Plans[plan];
     //process strip...
-    stripeHandleToken({ token, amount, description });
+    makePaymentProperty({ token, amount, description, property, history });
   }
   nextPage() {
     this.setState({ page: this.state.page + 1 });
@@ -77,4 +78,6 @@ function mapStateToProps(state, { params }) {
   return {};
 }
 
-export default connect(mapStateToProps, actions)(PaymentPlanContainer);
+export default connect(mapStateToProps, actions)(
+  withRouter(PaymentPlanContainer)
+);

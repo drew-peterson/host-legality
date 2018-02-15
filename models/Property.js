@@ -36,8 +36,8 @@ const propertySchema = new Schema({
 });
 
 propertySchema.pre('save', save);
-propertySchema.pre('findOne', findOne);
 propertySchema.pre('find', find);
+propertySchema.pre('findOneAndUpdate', findOneAndUpdate);
 
 function save(next) {
   const property = this;
@@ -50,10 +50,10 @@ function find(next) {
   // property.populate(_host);
   next();
 }
-function findOne(next) {
+
+function findOneAndUpdate(next) {
   const property = this;
-  // property.populate();
-  // property.populate(_host);
+  property.populate('_user', '-password');
   next();
 }
 

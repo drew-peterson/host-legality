@@ -1,5 +1,6 @@
 const keys = require('../config/keys');
 const requireLogin = require('../middlewares/requireLogin');
+const stripeChargeCard = require('../middlewares/stripeChargeCard');
 const mongoose = require('mongoose');
 const Property = mongoose.model('property');
 const _ = require('lodash');
@@ -33,4 +34,23 @@ module.exports = app => {
     const propertiesNormalize = _.keyBy(properties, p => p._id); // convert array to object map
     res.status(200).send(propertiesNormalize);
   });
+
+  app.post(
+    '/api/property/makePayment',
+    requireLogin,
+    stripeChargeCard,
+    async (req, res) => {
+      const { property } = req.body;
+
+      const updatedProperty = await Property.findByIdAndUpdate(
+        property._id,
+        {
+          status: 'paid'
+        },
+        { new: true }
+      );
+
+      res.status(200).send(updatedProperty);
+    }
+  );
 };
