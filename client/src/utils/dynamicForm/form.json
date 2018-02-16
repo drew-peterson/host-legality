@@ -1,33 +1,34 @@
 {
   "host": "Host name here",
-  "totalSteps": 3,
+  "totalSteps": 4,
   "steps": {
     "1": {
-      "form": "form-name-here",
-      "header": "header text here",
-      "subHeader": "subHeader text here",
-      "buttonText": "click me",
-      "formType": "input",
+      "form": "formA",
+      "header": "Do you own or rent?",
+      "buttonText": "Next",
+      "formType": "radio",
       "inputs": [
         {
-          "type": "number",
-          "label": "Tax Id",
-          "placeholder": "enter your personal tax id",
-          "name": "taxId"
+          "type": "radio",
+          "id": "own",
+          "label": "I own my property",
+          "name": "own",
+          "value": "I own my property"
         },
         {
-          "type": "number",
-          "label": "Social Security Number",
-          "placeholder": "Enter your SSN",
-          "name": "ssn"
+          "type": "radio",
+          "id": "rent",
+          "name": "rent",
+          "label": "I am renting",
+          "value": "I am renting"
         }
       ]
     },
     "2": {
-      "form": "form-name-2-here",
-      "header": "step 2 header text here",
-      "subHeader": "subHeader text here",
-      "buttonText": "click me",
+      "form": "formA",
+      "header": "Click new to register with TTX",
+      "subHeader": "We will automatically submit your info",
+      "buttonText": "Next",
       "formType": "input",
       "inputs": [
         {
@@ -45,25 +46,45 @@
       ]
     },
     "3": {
-      "form": "form-name-3-here",
-      "header": "Terms",
-      "subHeader": "Do you agree with the terms?",
-      "buttonText": "Continue",
+      "form": "formA",
+      "header": "Click next to apply with OSTR",
+      "subHeader": "We will automatically submit your info.",
+      "buttonText": "Next",
+      "formType": "input",
+      "inputs": [
+        {
+          "type": "number",
+          "label": "How many occupants will you be renting to each night?",
+          "placeholder": "enter max number of occupants",
+          "name": "numberOccupants"
+        },
+        {
+          "type": "number",
+          "label": "How much tax will you be charging per occupant?",
+          "placeholder": "Enter percentage (%)",
+          "name": "taxPercent"
+        }
+      ]
+    },
+    "4": {
+      "form": "formA",
+      "header": "Do you want to automatically renew?",
+      "buttonText": "Finish",
       "formType": "radio",
       "inputs": [
         {
           "type": "radio",
           "id": "yes",
-          "label": "YES",
-          "name": "radio",
-          "value": true
+          "label": "Yes, that sounds great",
+          "name": "yes",
+          "value": "Yes, that sounds great"
         },
         {
           "type": "radio",
           "id": "no",
-          "name": "radio",
-          "label": "NO",
-          "value": false
+          "name": "no",
+          "label": "Nope",
+          "value": "Nope"
         }
       ]
     }
