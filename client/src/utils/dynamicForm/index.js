@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import _ from 'lodash';
-import { H1, Subheader, Button, Input, rem } from '../../components/common';
+import {
+  H1,
+  Subheader,
+  Button,
+  Input,
+  rem,
+  RadioInput
+} from '../../components/common';
 import { reduxForm, Field } from 'redux-form';
 
 class DynamicForm extends Component {
@@ -11,6 +18,9 @@ class DynamicForm extends Component {
     switch (formType) {
       case 'text':
         return <p>text here.....</p>;
+      case 'radio':
+        return <Field name="radio" inputs={inputs} component={RadioInput} />;
+
       default:
         return _.map(inputs, input => {
           return <Field key={input.name} component={Input} {...input} />;

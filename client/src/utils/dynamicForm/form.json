@@ -1,6 +1,6 @@
 {
   "host": "Host name here",
-  "totalSteps": 2,
+  "totalSteps": 3,
   "steps": {
     "1": {
       "form": "form-name-here",
@@ -41,6 +41,29 @@
           "label": "Social Security Number",
           "placeholder": "Enter your SSN",
           "name": "ssn"
+        }
+      ]
+    },
+    "3": {
+      "form": "form-name-3-here",
+      "header": "Terms",
+      "subHeader": "Do you agree with the terms?",
+      "buttonText": "Continue",
+      "formType": "radio",
+      "inputs": [
+        {
+          "type": "radio",
+          "id": "yes",
+          "label": "YES",
+          "name": "radio",
+          "value": true
+        },
+        {
+          "type": "radio",
+          "id": "no",
+          "name": "radio",
+          "label": "NO",
+          "value": false
         }
       ]
     }
