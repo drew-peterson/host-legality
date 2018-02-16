@@ -3,7 +3,6 @@
   "totalSteps": 4,
   "steps": {
     "1": {
-      "form": "formA",
       "header": "Do you own or rent?",
       "buttonText": "Next",
       "formType": "radio",
@@ -25,7 +24,6 @@
       ]
     },
     "2": {
-      "form": "formA",
       "header": "Click new to register with TTX",
       "subHeader": "We will automatically submit your info",
       "buttonText": "Next",
@@ -46,7 +44,6 @@
       ]
     },
     "3": {
-      "form": "formA",
       "header": "Click next to apply with OSTR",
       "subHeader": "We will automatically submit your info.",
       "buttonText": "Next",
@@ -67,7 +64,6 @@
       ]
     },
     "4": {
-      "form": "formA",
       "header": "Do you want to automatically renew?",
       "buttonText": "Finish",
       "formType": "radio",

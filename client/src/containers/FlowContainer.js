@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { reset } from 'redux-form';
 import { flowSubmitStep } from '../actions';
 import DynamicForm from '../utils/dynamicForm';
+import CompleteFlowStep from '../utils/dynamicForm/CompleteFlowStep';
 
 // configuation and state for loginForm including form name!
 
@@ -18,18 +19,24 @@ class FlowContainer extends Component {
     flowSubmitStep({ values, step, property });
   }
 
+  afterSubmit(results, dispatch) {
+    // reset form so our wizard form does not keep track of old values...
+    dispatch(reset('propertyFlowForm'));
+  }
+
   switchForm() {
-    const { property, host } = this.props;
+    const { property, flowStepData } = this.props;
     if (property) {
       const { compliance } = property;
-      const flowStepData = host.steps[compliance.step];
       if (compliance.step > compliance.totalSteps) {
-        return <div>Complete....</div>;
+        return <CompleteFlowStep />;
       }
       return (
         <DynamicForm
           {...flowStepData}
           onSubmit={this.onFormSubmit.bind(this)}
+          onSubmitSuccess={this.afterSubmit.bind(this)}
+          form="propertyFlowForm"
         />
       );
     }
@@ -41,10 +48,13 @@ class FlowContainer extends Component {
   }
 }
 
-const mapStateToProps = ({ properties }, { params }) => {
+const mapStateToProps = ({ properties }, { params, host: { steps } }) => {
   if (properties) {
+    const property = properties[params.propertyId];
+    const { compliance: { step } } = property;
     return {
-      property: properties[params.propertyId]
+      property: property,
+      flowStepData: steps[step]
     };
   }
   return {};
