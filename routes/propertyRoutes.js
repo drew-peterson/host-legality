@@ -53,4 +53,15 @@ module.exports = app => {
       res.status(200).send(updatedProperty);
     }
   );
+
+  app.put('/api/property/flow/:propertyId', requireLogin, async (req, res) => {
+    const { values, step } = req.body;
+    const { propertyId } = req.params;
+
+    // console.log('values', values);
+    // console.log('step', step);
+
+    const property = await Property.findById(propertyId);
+    res.status(200).send(property);
+  });
 };
