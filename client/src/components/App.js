@@ -10,6 +10,7 @@ import DashboardScreen from '../screens/DashboardScreen';
 // import PaymentPlan from '../screens/PaymentPlan';
 import PaymentPlanScreen from '../screens/PaymentPlanScreen';
 import AddPropertyScreen from '../screens/AddPropertyScreen';
+import FlowScreen from '../screens/FlowScreen';
 
 // AUTH
 import LoginScreen from '../screens/LoginScreen';
@@ -48,6 +49,10 @@ class App extends Component {
             <Route
               path="/addProperty"
               component={requireAuth(AddPropertyScreen)}
+            />
+            <Route
+              path="/flow/:propertyId"
+              component={requireAuth(FlowScreen)}
             />
             <Route path="/resetPassword/:token" component={ResetPassword} />
             <Route component={NoMatch} />

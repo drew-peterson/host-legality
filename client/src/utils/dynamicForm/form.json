@@ -1,0 +1,48 @@
+{
+  "host": "Host name here",
+  "totalSteps": 2,
+  "steps": {
+    "1": {
+      "form": "form-name-here",
+      "header": "header text here",
+      "subHeader": "subHeader text here",
+      "buttonText": "click me",
+      "formType": "input",
+      "inputs": [
+        {
+          "type": "number",
+          "label": "Tax Id",
+          "placeholder": "enter your personal tax id",
+          "name": "taxId"
+        },
+        {
+          "type": "number",
+          "label": "Social Security Number",
+          "placeholder": "Enter your SSN",
+          "name": "ssn"
+        }
+      ]
+    },
+    "2": {
+      "form": "form-name-2-here",
+      "header": "step 2 header text here",
+      "subHeader": "subHeader text here",
+      "buttonText": "click me",
+      "formType": "input",
+      "inputs": [
+        {
+          "type": "number",
+          "label": "Tax Id",
+          "placeholder": "enter your personal tax id",
+          "name": "taxId"
+        },
+        {
+          "type": "number",
+          "label": "Social Security Number",
+          "placeholder": "Enter your SSN",
+          "name": "ssn"
+        }
+      ]
+    }
+  }
+}
