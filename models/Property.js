@@ -17,6 +17,13 @@ const propertySchema = new Schema({
     required: [true, 'googleData is required'],
     select: false
   },
+  compliance: {
+    type: Schema.Types.Mixed,
+    default: {
+      totalSteps: 2,
+      step: 1
+    }
+  },
   // _host: {
   //   type: Schema.Types.ObjectId,
   //   ref: 'Host',

@@ -8,7 +8,8 @@ import DynamicForm from '../utils/dynamicForm';
 
 class FlowContainer extends Component {
   state = {
-    stepFormData: null
+    stepFormData: null,
+    complete: false
   };
 
   onFormSubmit(values) {
@@ -17,42 +18,33 @@ class FlowContainer extends Component {
     flowSubmitStep({ values, step, property });
   }
 
-  // update form to show current form data for step
-  componentWillUpdate(ownProps) {
-    const { property, host } = ownProps;
-    const { stepFormData } = this.state;
-    if (property && !stepFormData) {
+  switchForm() {
+    const { property, host } = this.props;
+    if (property) {
       const { compliance } = property;
-      this.setState({ stepFormData: host.steps[compliance.step] });
-    }
-  }
-
-  render() {
-    const { stepFormData } = this.state;
-    // set dynamic form to current steps data
-    if (stepFormData) {
+      const flowStepData = host.steps[compliance.step];
+      if (compliance.step > compliance.totalSteps) {
+        return <div>Complete....</div>;
+      }
       return (
         <DynamicForm
-          {...stepFormData}
+          {...flowStepData}
           onSubmit={this.onFormSubmit.bind(this)}
         />
       );
     }
     return <div>loading.....</div>;
   }
+
+  render() {
+    return this.switchForm();
+  }
 }
 
 const mapStateToProps = ({ properties }, { params }) => {
   if (properties) {
-    let property = properties[params.propertyId];
-    property.compliance = {
-      totalSteps: 2, // taken from host.totalSteps, // default...
-      step: 1, // default value or updated when step complete
-      '1': {},
-      '2': {}
-    };
     return {
-      property: property
+      property: properties[params.propertyId]
     };
   }
   return {};

@@ -58,10 +58,11 @@ module.exports = app => {
     const { values, step } = req.body;
     const { propertyId } = req.params;
 
-    // console.log('values', values);
-    // console.log('step', step);
-
     const property = await Property.findById(propertyId);
+    property.compliance.step += 1;
+    property.compliance[step] = { ...values };
+    property.markModified('compliance');
+    property.save();
     res.status(200).send(property);
   });
 };
