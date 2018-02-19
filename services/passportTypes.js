@@ -7,7 +7,7 @@ exports.googleOAuthCb = passport.authenticate('google', {
   failureRedirect: '/login'
 });
 
-exports.facebookOAuth = passport.authenticate('facebook', {
-  scope: ['public_profile', 'email']
-});
-exports.facebookOAuthCb = passport.authenticate('facebook');
+// exports.facebookOAuth = passport.authenticate('facebook', {
+//   scope: ['public_profile', 'email']
+// });
+// exports.facebookOAuthCb = passport.authenticate('facebook');

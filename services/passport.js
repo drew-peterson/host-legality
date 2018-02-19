@@ -1,7 +1,7 @@
 // OAuth
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const FacebookStrategy = require('passport-facebook').Strategy;
+// const FacebookStrategy = require('passport-facebook').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
 const keys = require('../config/keys');
 const mongoose = require('mongoose');
@@ -43,24 +43,24 @@ passport.use(
 );
 
 // Facebook
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: keys.FACEBOOK_APP_ID,
-      clientSecret: keys.FACEBOOK_APP_SECRET,
-      callbackURL: '/auth/facebook/callback',
-      proxy: true
-    },
-    (accessToken, refreshToken, profile, done) => {
-      const data = {
-        _oAuthId: profile.id
-        // firstName: profile.name.givenName,
-        // lastName: profile.name.familyName
-      };
-      newOrExistingUser(data, done);
-    }
-  )
-);
+// passport.use(
+//   new FacebookStrategy(
+//     {
+//       clientID: keys.FACEBOOK_APP_ID,
+//       clientSecret: keys.FACEBOOK_APP_SECRET,
+//       callbackURL: '/auth/facebook/callback',
+//       proxy: true
+//     },
+//     (accessToken, refreshToken, profile, done) => {
+//       const data = {
+//         _oAuthId: profile.id
+//         // firstName: profile.name.givenName,
+//         // lastName: profile.name.familyName
+//       };
+//       newOrExistingUser(data, done);
+//     }
+//   )
+// );
 
 // Email password
 const localOptions = {
