@@ -33,7 +33,7 @@ module.exports = {
         // send email
         const mailConfig = {
           subject: 'Host Legality - reset password',
-          recipients: [{ email: 'drew.m.peterson@gmail.com' }]
+          recipients: [{ email: user.email }]
         };
         const mailer = new Mailer(
           mailConfig,
@@ -52,7 +52,7 @@ module.exports = {
     const { password } = req.body;
     const mailConfig = {
       subject: 'Host Legality - Your password was reset',
-      recipients: [{ email: 'drew.m.peterson@gmail.com' }]
+      recipients: [{ email: user.email }]
     };
 
     if (!password) {

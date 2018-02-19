@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, CLIENT_ERRORS } from './types';
+import { FETCH_USER, CLIENT_ERRORS, FETCH_MY_PROPERTIES } from './types';
 
 export const localSignup = (
   { email, password, firstName, lastName },
@@ -45,10 +45,12 @@ export const localLogin = (
     const { user } = res.data;
 
     if (user) {
+      const propertyRes = await axios.get('/api/property');
       dispatch({
         type: FETCH_USER,
         payload: user
       });
+      dispatch({ type: FETCH_MY_PROPERTIES, payload: propertyRes.data });
     }
   } catch ({ response }) {
     console.log('signupError', response.data);

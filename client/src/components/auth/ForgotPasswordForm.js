@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import axios from 'axios';
-import { Input } from '../common';
+import { Input, Button } from '../common';
 
 class ForgotPasswordForm extends Component {
   state = {
@@ -30,18 +30,18 @@ class ForgotPasswordForm extends Component {
           component={Input}
           type="email"
           name="email"
+          label="Email address "
           placeholder="Email"
           required
         />
 
-        <button
-          className="btn"
+        <Button
           type="submit"
           name="action"
           disabled={pristine || invalid || submitting}
         >
           Submit
-        </button>
+        </Button>
 
         {errors && (
           <ErrorsText className="red-text center-align">{errors}</ErrorsText>
@@ -54,12 +54,9 @@ class ForgotPasswordForm extends Component {
 
 const Form = styled.form`
   max-width: 60%;
-  background-color: ${props => props.theme.light};
   padding: 20px;
   margin: 0 auto;
   text-align: center;
-  border-radius: 10px;
-  color: white;
 `;
 
 const ErrorsText = styled.p`
