@@ -50,10 +50,6 @@ module.exports = {
   reset: async (req, res, next) => {
     const { token } = req.params;
     const { password } = req.body;
-    const mailConfig = {
-      subject: 'Host Legality - Your password was reset',
-      recipients: [{ email: user.email }]
-    };
 
     if (!password) {
       return next('Please provide a password in order to reset');
@@ -76,6 +72,10 @@ module.exports = {
             return next(err, user);
           });
         }
+        const mailConfig = {
+          subject: 'Host Legality - Your password was reset',
+          recipients: [{ email: user.email }]
+        };
         // send email
         next(null, res);
         const mailer = new Mailer(mailConfig, passwordWasReset(user));

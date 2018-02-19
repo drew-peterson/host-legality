@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { Input } from '../common';
+import { Input, Button } from '../common';
 import * as actions from '../../actions';
 
 class ResetPasswordForm extends Component {
@@ -20,6 +20,7 @@ class ResetPasswordForm extends Component {
         <Field
           component={Input}
           type="password"
+          label="Password"
           name="password"
           placeholder="Password"
           required
@@ -27,18 +28,18 @@ class ResetPasswordForm extends Component {
         <Field
           component={Input}
           type="password"
+          label="Retype Password"
           name="passwordCheck"
           placeholder="Type password again"
           required
         />
-        <button
-          className="btn"
+        <Button
           type="submit"
           name="action"
           disabled={pristine || submitting || invalid}
         >
           Reset Password
-        </button>
+        </Button>
 
         {errors && (
           <ErrorsText className="red-text center-align">
@@ -52,12 +53,9 @@ class ResetPasswordForm extends Component {
 
 const Form = styled.form`
   max-width: 60%;
-  background-color: ${props => props.theme.light};
   padding: 20px;
   margin: 0 auto;
   text-align: center;
-  border-radius: 10px;
-  color: white;
 `;
 
 const ErrorsText = styled.p`
