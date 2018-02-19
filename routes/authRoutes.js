@@ -30,11 +30,11 @@ module.exports = app => {
   });
 
   // FACEBOOK ------------------------------------------------------
-  app.get('/auth/facebook', facebookOAuth);
-
-  app.get('/auth/facebook/callback', facebookOAuthCb, (req, res) => {
-    res.redirect('/login');
-  });
+  // app.get('/auth/facebook', facebookOAuth);
+  //
+  // app.get('/auth/facebook/callback', facebookOAuthCb, (req, res) => {
+  //   res.redirect('/login');
+  // });
 
   // EMAIL PASSWORD ------------------------------------------------------
   app.post('/auth/localLogin', (req, res, next) => {

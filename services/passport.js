@@ -8,8 +8,6 @@ const mongoose = require('mongoose');
 
 const User = mongoose.model('user'); // bring in mongo class
 
-console.log('keys', keys);
-
 // generate unqiue indenityfing info
 // turn mongoose model into id
 passport.serializeUser((user, done) => {
