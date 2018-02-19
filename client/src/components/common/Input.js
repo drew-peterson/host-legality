@@ -23,7 +23,7 @@ const Input = ({
       floatingLabelText={label}
       floatingLabelFixed={true}
       defaultValue={defaultValue}
-      autocomplete="off"
+      autoComplete="off"
     />
   );
 };
