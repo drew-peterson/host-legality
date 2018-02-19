@@ -6,7 +6,7 @@ import { Button } from '../common';
 class StripePayment extends Component {
   render() {
     const { btnText, description, amount, handlePay } = this.props;
-    console.log('.env', process.env);
+
     return (
       <StripeCheckout
         name="Host Legality"
