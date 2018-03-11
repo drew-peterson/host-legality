@@ -3,7 +3,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // const FacebookStrategy = require('passport-facebook').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
-const keys = require('../config/keys');
+const keys = require('../../config/keys');
 const mongoose = require('mongoose');
 
 const User = mongoose.model('user'); // bring in mongo class
