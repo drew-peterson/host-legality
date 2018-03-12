@@ -18,7 +18,7 @@ const typeDefs = `
   }
 
   type Mutation {
-    localSignup(email: String!, password: String!, firstName: String!, lastName: String!): User
+    localSignup(email: String!, password: String!): User
     localLogin(email: String!, password: String!): User
     resetPassword(token: String!): User
   }

@@ -108,13 +108,13 @@ const newOrExistingUser = async ({ _oAuthId }, done) => {
 function signup({ email, password, firstName, lastName, req }) {
   const user = new User({ email, password, firstName, lastName });
   if (!email || !password) {
-    throw new Error('You must provide an email and password.');
+    throw 'You must provide an email and password.';
   }
 
   return User.findOne({ email })
     .then(existingUser => {
       if (existingUser) {
-        throw new Error('Email in use');
+        throw 'Email in Use';
       }
       return user.save();
     })

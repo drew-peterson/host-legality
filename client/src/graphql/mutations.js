@@ -1,5 +1,4 @@
 import gql from 'graphql-tag';
-import axios from 'axios';
 
 export const LOCAL_LOGIN = gql`
   mutation LocalLogin($email: String!, $password: String!) {
@@ -20,7 +19,21 @@ export const LOCAL_LOGIN = gql`
   }
 `;
 
-export const GQL = async query => {
-  const { data: { data } } = await axios.post('/graphql', query);
-  return data;
-};
+export const LOCAL_SIGNUP = gql`
+  mutation LocalSignup($email: String!, $password: String!) {
+    localSignup(email: $email, password: $password) {
+      _id
+      _oAuthId
+      email
+      properties {
+        _id
+        address
+        status
+        compliance
+        _user {
+          _id
+        }
+      }
+    }
+  }
+`;

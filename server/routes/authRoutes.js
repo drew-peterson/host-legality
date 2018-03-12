@@ -5,7 +5,6 @@ const googleOAuth = passportTypes.googleOAuth;
 const googleOAuthCb = passportTypes.googleOAuthCb;
 const facebookOAuth = passportTypes.facebookOAuth;
 const facebookOAuthCb = passportTypes.facebookOAuthCb;
-const createLocalUser = require('../middlewares/createLocalUser');
 const password = require('../middlewares/password');
 
 const oAuthType = (req, res, next) => {

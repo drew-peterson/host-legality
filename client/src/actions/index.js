@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { FETCH_USER, FETCH_MY_PROPERTIES } from './types';
-import { FETCH_USER_QUERY, GQL } from '../graphql/queries';
+import { FETCH_USER_QUERY } from '../graphql/queries';
+import { GQL } from '../utils/helpers';
 
 export * from './properties';
 export * from './auth';

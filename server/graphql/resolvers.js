@@ -31,8 +31,12 @@ const resolvers = {
     localLogin: (obj, { email, password }, req) => {
       return AuthService.login({ email, password, req });
     },
-    localSignup: (obj, { email, password, firstName, lastName }, req) => {
-      return AuthService.signup({ email, password, firstName, lastName, req });
+    localSignup: (obj, { email, password }, req) => {
+      return AuthService.signup({
+        email,
+        password,
+        req
+      });
     },
     resetPassword: (obj, { token }, req) => {}
   }
