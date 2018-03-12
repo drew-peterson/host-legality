@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import axios from 'axios';
 // import { CURRENT_USER } from '../fragments';
 
 export const FETCH_USER_QUERY = gql`
@@ -11,3 +12,8 @@ export const FETCH_USER_QUERY = gql`
     }
   }
 `;
+
+export const GQL = async query => {
+  const { data: { data } } = await axios.post('/graphql', query);
+  return data;
+};
