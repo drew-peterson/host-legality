@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { FETCH_USER, CLIENT_ERRORS, FETCH_MY_PROPERTIES } from './types';
+import { LOCAL_LOGIN, GQL } from '../graphql/mutations';
 
 export const localSignup = (
   { email, password, firstName, lastName },
@@ -35,25 +36,25 @@ export const localLogin = (
   { email, password, firstName, lastName },
   history
 ) => async dispatch => {
-  dispatch({ type: CLIENT_ERRORS, payload: null }); // reset errors.
-  try {
-    const res = await axios.post('/auth/localLogin', {
+  const query = {
+    query: LOCAL_LOGIN,
+    variables: {
       email,
       password
+    }
+  };
+
+  try {
+    const { localLogin } = await GQL(query);
+    dispatch({
+      type: FETCH_USER,
+      payload: localLogin
     });
-
-    const { user } = res.data;
-
-    if (user) {
-      const propertyRes = await axios.get('/api/property');
-      dispatch({
-        type: FETCH_USER,
-        payload: user
-      });
-      dispatch({ type: FETCH_MY_PROPERTIES, payload: propertyRes.data });
+    if (localLogin && localLogin.properties) {
+      dispatch({ type: FETCH_MY_PROPERTIES, payload: localLogin.properties });
     }
   } catch ({ response }) {
-    console.log('signupError', response.data);
+    console.log('login error', response.data);
     dispatch({
       type: CLIENT_ERRORS,
       payload: { localLogin: response.data.message }

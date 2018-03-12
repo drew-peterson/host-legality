@@ -1,13 +1,12 @@
 const log = require('node-pretty-log');
+const mongoose = require('mongoose');
 const _ = require('lodash');
-// const AuthService = require('../services/auth');
+
 // const keys = require('../../config/keys');
-require('../models/User');
-require('../models/Property');
+const AuthService = require('../services/passport');
+const Property = mongoose.model('property');
 
 //model
-const mongoose = require('mongoose');
-const Property = mongoose.model('property');
 
 // use helper functions as much as possible
 const resolvers = {
@@ -27,6 +26,15 @@ const resolvers = {
     properties: (obj, args, req) => {
       return Property.find({ _user: req.user._id });
     }
+  },
+  Mutation: {
+    localLogin: (obj, { email, password }, req) => {
+      return AuthService.login({ email, password, req });
+    },
+    localSignup: (obj, { email, password, firstName, lastName }, req) => {
+      return AuthService.signup({ email, password, firstName, lastName, req });
+    },
+    resetPassword: (obj, { token }, req) => {}
   }
 };
 

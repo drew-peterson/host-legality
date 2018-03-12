@@ -36,28 +36,6 @@ module.exports = app => {
   //   res.redirect('/login');
   // });
 
-  // EMAIL PASSWORD ------------------------------------------------------
-  app.post('/auth/localLogin', (req, res, next) => {
-    passport.authenticate('local', function(err, user, info) {
-      if (err) {
-        return next(err);
-      }
-      if (!user) {
-        return res.status(403).send({ message: info.message });
-      }
-      req.logIn(user, function(err) {
-        if (err) {
-          return next(err);
-        }
-        res.status(200).send({ user: req.user });
-      });
-    })(req, res, next);
-  });
-
-  app.post('/auth/localSignup', createLocalUser, (req, res) => {
-    res.status(200).send({ user: req.user });
-  });
-
   // OTHER ------------------------------------------------------
   app.get('/api/current_user', (req, res) => {
     // passport deserialize attaches mongoose user model to req.user once authorized

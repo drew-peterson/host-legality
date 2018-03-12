@@ -17,6 +17,12 @@ const typeDefs = `
     properties: [Property]
   }
 
+  type Mutation {
+    localSignup(email: String!, password: String!, firstName: String!, lastName: String!): User
+    localLogin(email: String!, password: String!): User
+    resetPassword(token: String!): User
+  }
+
   type User {
     _id: ID!
     _oAuthId: String
