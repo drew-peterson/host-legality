@@ -6,11 +6,17 @@ export * from './properties';
 export * from './auth';
 export * from './flow';
 
+const GQL = async query => {
+  const { data: { data } } = await axios.post('/graphql', query);
+  return data;
+};
+
 export const fetchUser = () => async dispatch => {
   const query = {
     query: FETCH_USER_QUERY
   };
-  const { data: { data: { user } } } = await axios.post('/graphql', query);
+
+  const { user } = await GQL(query);
 
   if (user && user.properties) {
     // delete user.properties; //
