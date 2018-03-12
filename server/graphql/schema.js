@@ -14,6 +14,7 @@ const typeDefs = `
 
   type Query {
     user: User
+    properties: [Property]
   }
 
   type User {
@@ -23,15 +24,19 @@ const typeDefs = `
     resetPasswordToken: String
     resetPasswordExpires: String
     email: String
-    properties: JSON
+    properties: [Property]
   }
+
 
   type Property {
     _id: ID!
     address: String!
+    googleData: JSON!,
+    compliance: JSON!,
+    _user: User!,
+    status: String!
   }
 
 `;
 
 module.exports = makeExecutableSchema({ typeDefs, resolvers });
-// module.exports = makeExecutableSchema({ typeDefs });

@@ -8,7 +8,15 @@ export const FETCH_USER_QUERY = gql`
       _id
       _oAuthId
       email
-      properties
+      properties {
+        _id
+        address
+        status
+        compliance
+        _user {
+          _id
+        }
+      }
     }
   }
 `;

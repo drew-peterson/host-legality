@@ -15,12 +15,17 @@ const resolvers = {
     user: (obj, args, req) => {
       // auth check if user is logged in
       return req.user;
+    },
+    properties: (obj, args, { user }) => {
+      if (user) {
+        return Property.find({ _user: user._id });
+      }
+      return null;
     }
   },
   User: {
-    properties: async (obj, args, req) => {
-      const properties = await Property.find({ _user: req.user._id });
-      return _.keyBy(properties, p => p._id); // convert array to object map
+    properties: (obj, args, req) => {
+      return Property.find({ _user: req.user._id });
     }
   }
 };
