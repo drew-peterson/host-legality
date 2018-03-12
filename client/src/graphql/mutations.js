@@ -30,10 +30,26 @@ export const LOCAL_SIGNUP = gql`
         address
         status
         compliance
-        _user {
-          _id
-        }
       }
+    }
+  }
+`;
+
+export const SAVE_PROPERTY_MUTATION = gql`
+  mutation SaveProperty(
+    $googleData: JSON!
+    $host: String!
+    $unitNumber: String
+  ) {
+    saveProperty(
+      googleData: $googleData
+      host: $host
+      unitNumber: $unitNumber
+    ) {
+      _id
+      address
+      status
+      compliance
     }
   }
 `;

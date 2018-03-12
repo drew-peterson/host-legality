@@ -38,7 +38,25 @@ const resolvers = {
         req
       });
     },
-    resetPassword: (obj, { token }, req) => {}
+    resetPassword: (obj, { token }, req) => {},
+    saveProperty: async (obj, { googleData, unitNumber, host }, req) => {
+      if (!req.user) {
+        throw 'No Auth';
+      }
+      try {
+        const property = await new Property({
+          _user: req.user._id,
+          address: googleData.formatted_address,
+          unitNumber,
+          googleData,
+          host
+        });
+        property.save();
+        return property;
+      } catch (err) {
+        console.log('property err', err);
+      }
+    }
   }
 };
 

@@ -21,6 +21,7 @@ const typeDefs = `
     localSignup(email: String!, password: String!): User
     localLogin(email: String!, password: String!): User
     resetPassword(token: String!): User
+    saveProperty(googleData: JSON!, unitNumber: String, host: String!): Property
   }
 
   type User {

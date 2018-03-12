@@ -19,3 +19,14 @@ export const FETCH_USER_QUERY = gql`
     }
   }
 `;
+
+export const FETCH_PROPERTIES = gql`
+  {
+    properties {
+      _id
+      address
+      compliance
+      status
+    }
+  }
+`;

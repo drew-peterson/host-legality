@@ -1,20 +1,32 @@
 import axios from 'axios';
 import {
-  FETCH_MY_PROPERTIES,
+  // FETCH_MY_PROPERTIES,
   SAVE_PROPERTY,
   MAKE_PAYMENT_PROPERTY,
   CLIENT_ERRORS
 } from './types';
 
-export const fetchMyProperties = () => async dispatch => {
-  const res = await axios.get('/api/property');
-  dispatch({ type: FETCH_MY_PROPERTIES, payload: res.data });
-};
+import { GQL } from '../utils/helpers';
+import { SAVE_PROPERTY_MUTATION } from '../graphql/mutations';
 
-export const saveProperty = (values, history) => async dispatch => {
-  const res = await axios.post('/api/property', values);
-  dispatch({ type: SAVE_PROPERTY, payload: res.data });
-  history.push('/dashboard');
+// export const fetchMyProperties = () => async dispatch => {
+//   console.log('fetchMyProperties', fetchMyProperties);
+//   // graphql properties...
+//   const res = await axios.get('/api/property');
+//   dispatch({ type: FETCH_MY_PROPERTIES, payload: res.data });
+// };
+
+export const saveProperty = (variables, history) => async dispatch => {
+  try {
+    const { saveProperty } = await GQL({
+      query: SAVE_PROPERTY_MUTATION,
+      variables
+    });
+    dispatch({ type: SAVE_PROPERTY, payload: saveProperty });
+    history.push('/dashboard');
+  } catch (err) {
+    console.log('saveProperty err', err);
+  }
 };
 
 export const selectProperty = propertyId => async dispatch => {
