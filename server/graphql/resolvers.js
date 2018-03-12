@@ -19,10 +19,8 @@ const resolvers = {
   },
   User: {
     properties: async (obj, args, req) => {
-      // return Property.find({ _user: req.user._id });
       const properties = await Property.find({ _user: req.user._id });
-      const normalized = _.keyBy(properties, p => p._id); // convert array to object map
-      return normalized;
+      return _.keyBy(properties, p => p._id); // convert array to object map
     }
   }
 };
