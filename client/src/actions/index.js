@@ -6,11 +6,6 @@ export * from './properties';
 export * from './auth';
 export * from './flow';
 
-const GQL = async query => {
-  const { data: { data } } = await axios.post('/graphql', query);
-  return data;
-};
-
 export const fetchUser = () => async dispatch => {
   const query = {
     query: FETCH_USER_QUERY
@@ -45,4 +40,9 @@ export const stripeHandleToken = ({
   // update properties
 
   // dispatch({ type: FETCH_USER, payload: res.data });
+};
+
+const GQL = async query => {
+  const { data: { data } } = await axios.post('/graphql', query);
+  return data;
 };
