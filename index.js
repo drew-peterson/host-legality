@@ -3,16 +3,21 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+
+// GRAPHQL
+const graphqlExpress = require('apollo-server-express').graphqlExpress;
+const graphiqlExpress = require('apollo-server-express').graphiqlExpress;
+const schema = require('./server/graphql/schema');
+
 const keys = require('./config/keys');
+const handleErrors = require('./server/middlewares/errors');
+
+mongoose.connect(keys.MONGO_URI);
 
 // Models
 require('./server/models/User'); // require mongoose models -- model has to exist first before passport can use it
 require('./server/models/Property');
 require('./server/services/passport'); // make sure passport is ran...
-
-const handleErrors = require('./server/middlewares/errors');
-
-mongoose.connect(keys.MONGO_URI);
 
 const app = express();
 
@@ -34,6 +39,22 @@ require('./server/routes/authRoutes')(app); // bring in authRoutes function and 
 require('./server/routes/billingRoutes')(app);
 require('./server/routes/propertyRoutes')(app);
 
+// ROUTES - GraphQL
+app.use(
+  '/graphql',
+  bodyParser.json(),
+  graphqlExpress(req => ({ schema, context: req }))
+);
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use(
+    '/graphiql',
+    graphiqlExpress({
+      endpointURL: '/graphql'
+    })
+  );
+}
+
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assesset (main.js, main.css) files
   app.use(express.static('client/build')); // check for specific file request is looking for -- index.html will ask for main.js in client/build/static/js...
@@ -50,20 +71,3 @@ app.use(handleErrors.clientErrorHandler);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);
-
-// express-middleware:
-// app.use -> attach middleware: small functions to be called before sending to route handler app.get....
-
-// cookieSession:
-// takes data out of cookie and assigns to req.session
-// req.session: passport: {user: user._id} // stores user id
-// passports access data on rec.session
-
-// express does not reccomend cookie-session they recommend express-session
-// express-session: cookie stores reference to a session then looks up data from session-store > figure out who user is : session-store w/ session id -> returns user model
-// -- trys to store all data outside cookie
-// -- can store large amounts of data
-
-// cookie-session: the cookie is the session > reference to user id
-// -- store all data on cookie
-// -- can only store small amount of data
