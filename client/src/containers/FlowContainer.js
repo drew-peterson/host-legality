@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { reset } from 'redux-form';
 import { flowSubmitStep } from '../actions';
 import DynamicForm from '../utils/dynamicForm';
+import host from '../utils/dynamicForm/form.json';
 import CompleteFlowStep from '../utils/dynamicForm/CompleteFlowStep';
 
 // configuation and state for loginForm including form name!
@@ -28,6 +29,7 @@ class FlowContainer extends Component {
     const { property, flowStepData } = this.props;
     if (property) {
       const { compliance } = property;
+      console.log('complete??', compliance.step, compliance.totalSteps);
       if (compliance.step > compliance.totalSteps) {
         return <CompleteFlowStep />;
       }
@@ -44,11 +46,13 @@ class FlowContainer extends Component {
   }
 
   render() {
+    console.log('this.props', this.props);
     return this.switchForm();
   }
 }
 
-const mapStateToProps = ({ properties }, { params, host: { steps } }) => {
+const mapStateToProps = ({ properties }, { params }) => {
+  const { steps } = host;
   if (properties) {
     const property = properties[params.propertyId];
     const { compliance: { step } } = property;

@@ -20,7 +20,7 @@ const propertySchema = new Schema({
   compliance: {
     type: Schema.Types.Mixed,
     default: {
-      totalSteps: 2,
+      totalSteps: 4,
       step: 1
     }
   },
