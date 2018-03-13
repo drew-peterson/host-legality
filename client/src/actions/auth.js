@@ -3,13 +3,13 @@ import { FETCH_USER, CLIENT_ERRORS, FETCH_MY_PROPERTIES } from './types';
 import { GQL } from '../utils/helpers';
 import { LOCAL_LOGIN, LOCAL_SIGNUP } from '../graphql/mutations';
 
-export const localSignup = (variables, history) => async dispatch => {
+export const localSignup = (input, history) => async dispatch => {
   dispatch({ type: CLIENT_ERRORS, payload: null });
 
   try {
     const { localSignup } = await GQL({
       query: LOCAL_SIGNUP,
-      variables
+      variables: { input }
     });
     if (localSignup) {
       dispatch({
@@ -26,17 +26,11 @@ export const localSignup = (variables, history) => async dispatch => {
   }
 };
 
-export const localLogin = (
-  { email, password, firstName, lastName },
-  history
-) => async dispatch => {
+export const localLogin = (input, history) => async dispatch => {
   dispatch({ type: CLIENT_ERRORS, payload: null });
   const query = {
     query: LOCAL_LOGIN,
-    variables: {
-      email,
-      password
-    }
+    variables: { input }
   };
 
   try {

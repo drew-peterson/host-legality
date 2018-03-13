@@ -16,11 +16,11 @@ import { SAVE_PROPERTY_MUTATION } from '../graphql/mutations';
 //   dispatch({ type: FETCH_MY_PROPERTIES, payload: res.data });
 // };
 
-export const saveProperty = (variables, history) => async dispatch => {
+export const saveProperty = (input, history) => async dispatch => {
   try {
     const { saveProperty } = await GQL({
       query: SAVE_PROPERTY_MUTATION,
-      variables
+      variables: { input }
     });
     dispatch({ type: SAVE_PROPERTY, payload: saveProperty });
     history.push('/dashboard');

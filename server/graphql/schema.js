@@ -18,10 +18,10 @@ const typeDefs = `
   }
 
   type Mutation {
-    localSignup(email: String!, password: String!): User
-    localLogin(email: String!, password: String!): User
+    localSignup(input: AuthFormInput!): User
+    localLogin(input: AuthFormInput!): User
     resetPassword(token: String!): User
-    saveProperty(googleData: JSON!, unitNumber: String, host: String!): Property
+    saveProperty(input: NewPropertyInput!): Property
   }
 
   type User {
@@ -44,6 +44,17 @@ const typeDefs = `
     status: String!
   }
 
+
+  input NewPropertyInput {
+    googleData: JSON!
+    unitNumber: String
+    host: String!
+  }
+
+  input AuthFormInput {
+    email: String!
+    password: String!
+  }
 `;
 
 module.exports = makeExecutableSchema({ typeDefs, resolvers });

@@ -28,10 +28,10 @@ const resolvers = {
     }
   },
   Mutation: {
-    localLogin: (obj, { email, password }, req) => {
+    localLogin: (obj, { input: { email, password } }, req) => {
       return AuthService.login({ email, password, req });
     },
-    localSignup: (obj, { email, password }, req) => {
+    localSignup: (obj, { input: { email, password } }, req) => {
       return AuthService.signup({
         email,
         password,
@@ -39,7 +39,11 @@ const resolvers = {
       });
     },
     resetPassword: (obj, { token }, req) => {},
-    saveProperty: async (obj, { googleData, unitNumber, host }, req) => {
+    saveProperty: async (
+      obj,
+      { input: { googleData, unitNumber, host } },
+      req
+    ) => {
       if (!req.user) {
         throw 'No Auth';
       }
