@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-export default function(ComposedComponent) {
+export default function(ComposedComponent, requireAdmin = false) {
   class Authentication extends Component {
     componentWillUpdate(nextProps) {
       if (!nextProps.auth) {
         localStorage.setItem('from', nextProps.location.pathname);
         nextProps.history.push('/login');
+        return;
+      }
 
-        // using redux to handle redirect however googleOauth will not work...
-        // nextProps.history.push({
-        //   pathname: '/login',
-        //   state: { from: nextProps.location } // used to redirect  after login
-        // });
+      if (requireAdmin && !nextProps.admin) {
+        localStorage.setItem('from', nextProps.location.pathname);
+        nextProps.history.push('/login');
+        return;
       }
     }
 
@@ -22,7 +23,7 @@ export default function(ComposedComponent) {
     }
   }
   function mapStateToProps({ auth }) {
-    return { auth };
+    return { auth, admin: auth ? auth.admin : false };
   }
   return connect(mapStateToProps)(Authentication); // connect Authentication to state...
 }

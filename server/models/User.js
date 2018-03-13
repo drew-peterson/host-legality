@@ -7,6 +7,10 @@ const userSchema = new Schema({
   password: String,
   resetPasswordToken: String,
   resetPasswordExpires: Date,
+  admin: {
+    type: Boolean,
+    default: false
+  },
   email: {
     type: String,
     unique: true,

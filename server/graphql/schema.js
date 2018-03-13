@@ -34,6 +34,7 @@ const typeDefs = `
     resetPasswordExpires: String
     email: String
     properties: [Property]
+    admin: Boolean
   }
 
 

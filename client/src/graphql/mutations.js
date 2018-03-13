@@ -6,6 +6,7 @@ export const LOCAL_LOGIN = gql`
       _id
       _oAuthId
       email
+      admin
       properties {
         _id
         address
@@ -25,6 +26,7 @@ export const LOCAL_SIGNUP = gql`
       _id
       _oAuthId
       email
+      admin
       properties {
         _id
         address

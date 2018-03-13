@@ -7,14 +7,12 @@ export const FETCH_USER_QUERY = gql`
       _id
       _oAuthId
       email
+      admin
       properties {
         _id
         address
         status
         compliance
-        _user {
-          _id
-        }
       }
     }
   }

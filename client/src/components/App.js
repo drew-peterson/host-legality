@@ -17,6 +17,7 @@ import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
 import ResetPassword from '../screens/ResetPassword';
 import ForgotPassword from '../screens/ForgotPassword';
+import Admin from '../screens/Admin';
 import requireAuth from './auth/require_auth';
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
             <Route path="/signup" component={SignupScreen} />
             <Route path="/forgotPassword" component={ForgotPassword} />
             <Route path="/dashboard" component={requireAuth(DashboardScreen)} />
+            <Route path="/admin" component={requireAuth(Admin, true)} />
             {/* <Route
               path="/paymentPlan/:propertyId"
               component={requireAuth(PaymentPlan)}
