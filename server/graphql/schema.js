@@ -22,6 +22,7 @@ const typeDefs = `
     localLogin(input: AuthFormInput!): User
     resetPassword(token: String!): User
     saveProperty(input: NewPropertyInput!): Property
+    propertyMakePayment(propertyID: ID!, stripe: StripeInput!): Property
   }
 
   type User {
@@ -54,6 +55,12 @@ const typeDefs = `
   input AuthFormInput {
     email: String!
     password: String!
+  }
+
+  input StripeInput {
+    amount: Float!
+    description: String!
+    tokenID: String!
   }
 `;
 

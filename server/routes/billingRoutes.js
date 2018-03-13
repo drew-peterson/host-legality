@@ -1,6 +1,3 @@
-const keys = require('../../config/keys');
-
-const stripe = require('stripe')(keys.STRIPE_SECRET_KEY);
 const requireLogin = require('../middlewares/requireLogin');
 
 // add our custom middleware to prevent people not logged in to access route

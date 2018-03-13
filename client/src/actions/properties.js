@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   // FETCH_MY_PROPERTIES,
   SAVE_PROPERTY,
@@ -7,7 +6,10 @@ import {
 } from './types';
 
 import { GQL } from '../utils/helpers';
-import { SAVE_PROPERTY_MUTATION } from '../graphql/mutations';
+import {
+  SAVE_PROPERTY_MUTATION,
+  STRIPE_PROPERTY_PAYMENT
+} from '../graphql/mutations';
 
 // export const fetchMyProperties = () => async dispatch => {
 //   console.log('fetchMyProperties', fetchMyProperties);
@@ -29,29 +31,30 @@ export const saveProperty = (input, history) => async dispatch => {
   }
 };
 
-export const selectProperty = propertyId => async dispatch => {
-  console.log('propertyId', propertyId);
+export const selectProperty = propertyID => async dispatch => {
+  console.log('propertyID', propertyID);
   // const res = await axios.get('/api/current_user');
   // dispatch({ type: FETCH_USER, payload: res.data });
 };
 
 export const makePaymentProperty = ({
-  token,
-  amount,
-  description,
-  property,
+  propertyID,
+  stripe,
   history
 }) => async dispatch => {
+  const query = {
+    variables: {
+      propertyID,
+      stripe
+    },
+    query: STRIPE_PROPERTY_PAYMENT
+  };
   try {
-    const res = await axios.post('/api/property/makePayment', {
-      token,
-      amount,
-      description,
-      property
-    });
+    const { propertyMakePayment } = await GQL(query);
     history.push('/dashboard');
-    dispatch({ type: MAKE_PAYMENT_PROPERTY, payload: res.data });
+    dispatch({ type: MAKE_PAYMENT_PROPERTY, payload: propertyMakePayment });
   } catch (err) {
+    console.log('err', err);
     dispatch({ type: CLIENT_ERRORS, payload: err });
   }
 };

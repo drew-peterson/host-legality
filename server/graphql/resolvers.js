@@ -4,6 +4,7 @@ const _ = require('lodash');
 
 // const keys = require('../../config/keys');
 const AuthService = require('../services/passport');
+const stripeChargeCard = require('../services/stripeChargeCard');
 const Property = mongoose.model('property');
 
 //model
@@ -59,6 +60,26 @@ const resolvers = {
         return property;
       } catch (err) {
         console.log('property err', err);
+      }
+    },
+    propertyMakePayment: async (obj, { propertyID, stripe }, req) => {
+      if (!req.user) {
+        throw 'No Auth';
+      }
+
+      try {
+        const charge = await stripeChargeCard(stripe);
+        if (charge && charge.paid) {
+          return await Property.findByIdAndUpdate(
+            propertyID,
+            {
+              status: 'paid'
+            },
+            { new: true }
+          );
+        }
+      } catch (err) {
+        throw err;
       }
     }
   }

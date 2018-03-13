@@ -20,7 +20,15 @@ class PaymentPlanContainer extends Component {
     const { makePaymentProperty, property, history } = this.props;
     const { amount, description } = this.Plans[plan];
     //process strip...
-    makePaymentProperty({ token, amount, description, property, history });
+    makePaymentProperty({
+      propertyID: property._id,
+      stripe: {
+        tokenID: token.id,
+        amount,
+        description
+      },
+      history
+    });
   }
   nextPage() {
     this.setState({ page: this.state.page + 1 });

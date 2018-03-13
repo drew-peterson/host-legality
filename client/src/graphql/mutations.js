@@ -45,3 +45,14 @@ export const SAVE_PROPERTY_MUTATION = gql`
     }
   }
 `;
+
+export const STRIPE_PROPERTY_PAYMENT = gql`
+  mutation PropertyMakePayment($propertyID: ID!, $stripe: StripeInput!) {
+    propertyMakePayment(propertyID: $propertyID, stripe: $stripe) {
+      _id
+      address
+      status
+      compliance
+    }
+  }
+`;
