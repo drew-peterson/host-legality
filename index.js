@@ -37,8 +37,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 require('./server/routes/authRoutes')(app); // bring in authRoutes function and call it with app
-require('./server/routes/billingRoutes')(app);
-require('./server/routes/propertyRoutes')(app);
 
 // ROUTES - GraphQL
 app.use(

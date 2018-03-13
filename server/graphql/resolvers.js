@@ -81,6 +81,20 @@ const resolvers = {
       } catch (err) {
         throw err;
       }
+    },
+    flowUpdate: async (obj, { propertyID, values, step }, req) => {
+      if (!req.user) throw 'No Auth';
+
+      try {
+        const property = await Property.findById(propertyID);
+        property.compliance.step += 1;
+        property.compliance[step] = values;
+        property.markModified('compliance');
+        property.save();
+        return property;
+      } catch (err) {
+        throw err;
+      }
     }
   }
 };

@@ -16,7 +16,7 @@ class FlowContainer extends Component {
   onFormSubmit(values) {
     const { flowSubmitStep, property } = this.props;
     const { compliance: { step } } = property;
-    flowSubmitStep({ values, step, property });
+    flowSubmitStep({ values, step, propertyID: property._id });
   }
 
   afterSubmit(results, dispatch) {

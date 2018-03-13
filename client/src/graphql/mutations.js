@@ -56,3 +56,14 @@ export const STRIPE_PROPERTY_PAYMENT = gql`
     }
   }
 `;
+
+export const FLOW_UPDATE = gql`
+  mutation FlowUpdate($propertyID: ID!, $step: Int!, $values: JSON!) {
+    flowUpdate(propertyID: $propertyID, step: $step, values: $values) {
+      _id
+      address
+      status
+      compliance
+    }
+  }
+`;

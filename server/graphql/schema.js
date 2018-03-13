@@ -23,6 +23,7 @@ const typeDefs = `
     resetPassword(token: String!): User
     saveProperty(input: NewPropertyInput!): Property
     propertyMakePayment(propertyID: ID!, stripe: StripeInput!): Property
+    flowUpdate(propertyID: ID!, step: Int!, values: JSON!): Property
   }
 
   type User {

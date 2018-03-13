@@ -21,7 +21,6 @@ import requireAuth from './auth/require_auth';
 
 class App extends Component {
   // preferred location for intial ajax request w/ new react
-  // componentDidMount() {
   componentWillMount() {
     this.props.fetchUser(); // check auth...
   }
