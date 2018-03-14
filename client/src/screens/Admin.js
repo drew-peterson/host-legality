@@ -1,15 +1,24 @@
-import React, { Component } from 'react';
-
+import React from 'react';
+import NewHost from '../components/flow/NewHost';
 import { Container, H1 } from '../components/common';
 
-class Admin extends Component {
-  render() {
-    return (
-      <Container>
-        <H1>Admin</H1>
-      </Container>
-    );
-  }
-}
+import styled from 'styled-components';
 
-export default Admin;
+export default () => {
+  return (
+    <Container>
+      <NewHostWrap>
+        <H1>New Host</H1>
+        <NewHost />
+      </NewHostWrap>
+    </Container>
+  );
+};
+
+const NewHostWrap = styled.div`
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 20px;
+`;
