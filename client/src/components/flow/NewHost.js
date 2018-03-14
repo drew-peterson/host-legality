@@ -7,14 +7,20 @@ class NewHost extends Component {
   onSubmit(values) {
     console.log('values', values);
     const steps = {};
+    const host = {
+      host: '',
+      totalSteps: 0,
+      steps
+    };
     _.each(values, (value, key) => {
-      const idx = key[0]; // 0
+      const idx = parseInt(key[0], 10) + 1; // 1
 
       if (key === 'hostName') {
-        steps['host'] = value;
+        host['host'] = value;
       } else {
-        const step = steps[idx]; //0:{}
+        const step = steps[idx]; //1:{}
         if (!step) {
+          host.totalSteps += 1;
           steps[idx] = { inputs: [] };
         }
         const sliceA = key.slice(2); //header , type-0
@@ -35,7 +41,8 @@ class NewHost extends Component {
         }
       }
     });
-    console.log('steps', steps);
+    host.steps = steps;
+    console.log('host', host);
   }
   render() {
     return <NewHostForm onSubmit={this.onSubmit.bind(this)} />;
