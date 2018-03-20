@@ -54,7 +54,7 @@ if (process.env.NODE_ENV !== 'production') {
   );
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (['production', 'ci'].includes(process.env.NODE_ENV)) {
   // Express will serve up production assesset (main.js, main.css) files
   app.use(express.static('client/build')); // check for specific file request is looking for -- index.html will ask for main.js in client/build/static/js...
   // Express will serve up index.html if it doesn not reconize the route
