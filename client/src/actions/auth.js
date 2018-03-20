@@ -19,9 +19,12 @@ export const localSignup = (input, history) => async dispatch => {
       history.push('/addProperty');
     }
   } catch (err) {
+    console.log('err', err);
     dispatch({
       type: CLIENT_ERRORS,
-      payload: { localLogin: err[0].message } // component has a prop looking for localLogin
+      payload: {
+        localLogin: err.errors ? 'Valid credentials required' : err[0].message
+      } // component has a prop looking for localLogin
     });
   }
 };

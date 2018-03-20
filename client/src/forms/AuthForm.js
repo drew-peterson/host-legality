@@ -10,6 +10,7 @@ import { Input, Button, rem } from '../components/common';
 class AuthForm extends Component {
   render() {
     const { handleSubmit, errors, btnText, oAuthType } = this.props;
+    const test = 'drew';
 
     return (
       <LoginWrap>
@@ -19,6 +20,7 @@ class AuthForm extends Component {
           href={`/auth/google?oAuthType=${oAuthType}`}
           color="black"
           backgroundcolor="white"
+          id="google-oauth"
         >
           Google
         </Button>
@@ -41,8 +43,8 @@ class AuthForm extends Component {
             {btnText}
           </Button>
 
-          {errors && (
-            <ErrorsText className="red-text center-align">
+          {errors.localLogin && (
+            <ErrorsText className="red-text center-align auth-error">
               {errors.localLogin}
             </ErrorsText>
           )}

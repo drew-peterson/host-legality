@@ -38,3 +38,11 @@ test('When logged in show dashboard and logout button', async () => {
   expect(dashboardText).toEqual('dashboard');
   expect(logoutText).toEqual('logout');
 });
+
+test('when logout header updates', async () => {
+  await page.login();
+  await page.click('#logout-nav');
+  await page.waitFor('#login-nav');
+  const text = await page.getContentsOf('#login-nav');
+  expect(text).toEqual('Sign in');
+});

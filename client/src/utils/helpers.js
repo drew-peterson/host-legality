@@ -8,6 +8,9 @@ export const GQL = async query => {
     }
     return data;
   } catch (err) {
+    if (err.response) {
+      throw err.response.data;
+    }
     throw err;
   }
 };

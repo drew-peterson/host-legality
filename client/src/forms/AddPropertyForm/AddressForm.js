@@ -7,7 +7,7 @@ import { Button, Input, rem } from '../../components/common';
 const AddressForm = props => {
   const { handleSubmit, nextBtnText } = props;
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} id="addProperty">
       <Field
         className="form-input"
         name="googleData"
