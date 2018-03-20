@@ -58,4 +58,4 @@ userSchema.methods.comparePassword = function(canidatePassword, cb) {
   });
 };
 
-mongoose.model('user', userSchema);
+mongoose.model('User', userSchema);

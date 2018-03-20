@@ -13,24 +13,34 @@ class Header extends Component {
         return;
       case false:
         return [
-          <Link key="1" to="/login">
+          <Link key="1" to="/login" id="login-nav">
             Sign in
           </Link>,
-          <Link to="/signup" key="2">
+          <Link to="/signup" key="2" id="signup-nav">
             <GetStartedBtn>Get started</GetStartedBtn>
           </Link>
         ];
       default:
         return [
           auth.admin && (
-            <Link style={{ marginRight: '15px' }} key="1" to="/admin">
+            <Link
+              style={{ marginRight: '15px' }}
+              key="1"
+              to="/admin"
+              id="admin-nav"
+            >
               admin
             </Link>
           ),
-          <Link style={{ marginRight: '15px' }} to="/dashboard" key="2">
+          <Link
+            style={{ marginRight: '15px' }}
+            to="/dashboard"
+            key="2"
+            id="dashboard-nav"
+          >
             dashboard
           </Link>,
-          <a href="/api/logout" key="3">
+          <a href="/api/logout" key="3" id="logout-nav">
             logout
           </a>
         ];
@@ -39,7 +49,9 @@ class Header extends Component {
   render() {
     return (
       <NavBar>
-        <Link to={this.props.auth ? '/' : '/'}>Host Legality</Link>
+        <Link to={this.props.auth ? '/' : '/'} id="logo-nav">
+          Host Legality
+        </Link>
         <LinkContainer>{this.renderContent()}</LinkContainer>
       </NavBar>
     );

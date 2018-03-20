@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const User = mongoose.model('user');
+const User = mongoose.model('User');
 const _ = require('lodash');
 // const Host = mongoose.model('Host');
 

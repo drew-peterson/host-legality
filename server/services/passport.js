@@ -3,11 +3,10 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 // const FacebookStrategy = require('passport-facebook').Strategy;
 const LocalStrategy = require('passport-local').Strategy;
-const keys = require('../../config/keys');
 const mongoose = require('mongoose');
+const keys = require('../../config/keys');
 
-require('../models'); // why??
-const User = mongoose.model('user'); // bring in mongo class
+const User = mongoose.model('User'); // bring in mongo class
 
 // generate unqiue indenityfing info
 // turn mongoose model into id

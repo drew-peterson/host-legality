@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = mongoose.model('user'); // bring in mongo class
+const User = mongoose.model('User'); // bring in mongo class
 var crypto = require('crypto');
 
 const Mailer = require('../services/Mailer');

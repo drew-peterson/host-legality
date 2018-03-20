@@ -1,24 +1,22 @@
-const express = require('express');
 const mongoose = require('mongoose');
+const express = require('express');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 
+// Models -- make first!
+require('./server/models');
+require('./server/services/passport'); // make sure passport is ran...
+
 // GRAPHQL
-const graphqlExpress = require('apollo-server-express').graphqlExpress;
-const graphiqlExpress = require('apollo-server-express').graphiqlExpress;
+const { graphqlExpress } = require('apollo-server-express');
+const { graphiqlExpress } = require('apollo-server-express');
 const schema = require('./server/graphql/schema');
 
 const keys = require('./config/keys');
 const handleErrors = require('./server/middlewares/errors');
 
 mongoose.connect(keys.MONGO_URI);
-
-// Models
-// require('./server/models/User'); // require mongoose models -- model has to exist first before passport can use it
-// require('./server/models/Property');
-require('./server/models');
-require('./server/services/passport'); // make sure passport is ran...
 
 const app = express();
 
