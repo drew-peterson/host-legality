@@ -6,6 +6,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const keys = require('../../config/keys');
 const mongoose = require('mongoose');
 
+require('../models'); // why??
 const User = mongoose.model('user'); // bring in mongo class
 
 // generate unqiue indenityfing info
@@ -104,11 +105,46 @@ const newOrExistingUser = async ({ _oAuthId }, done) => {
   }
 };
 
-// JWT
-// Using JWT's in the header of each request in the other course was a result of putting the react app on one domain and the API server on a different one.  In a few lectures we dive really deep into talking about why the server setup in this course makes working with cookies possible.  One of the nasty things around JWT's is that there isn't a great place to store them on the client side - they are almost always weak against XSS attacks.  Using cookies solves that huge huge issue.
+function signup({ email, password, firstName, lastName, req }) {
+  const user = new User({ email, password, firstName, lastName });
+  if (!email || !password) {
+    throw 'You must provide an email and password.';
+  }
 
-// cookeies --> we dont have to worry about them on the react side of
+  return User.findOne({ email })
+    .then(existingUser => {
+      if (existingUser) {
+        throw 'Email in Use';
+      }
+      return user.save();
+    })
+    .then(user => {
+      return new Promise((resolve, reject) => {
+        req.logIn(user, err => {
+          if (err) {
+            reject(err);
+          }
+          resolve(user);
+        });
+      });
+    });
+}
 
-// COOKIES
-// request from browser after logged in > cookie extracts user id and in req we get req.user
-// I think cookie only store the user._id -> the deserialize is the last middleware and attaches the user model to the req
+function login({ email, password, req }) {
+  return new Promise((resolve, reject) => {
+    passport.authenticate('local', (err, user) => {
+      if (!user) {
+        reject('Invalid credentials.');
+      }
+
+      req.logIn(user, err => {
+        if (err) {
+          reject(err);
+        }
+        resolve(user);
+      });
+    })({ body: { email, password } }); // syntax important....
+  });
+}
+
+module.exports = { login, signup };

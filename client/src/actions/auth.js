@@ -1,59 +1,49 @@
 import axios from 'axios';
 import { FETCH_USER, CLIENT_ERRORS, FETCH_MY_PROPERTIES } from './types';
+import { GQL } from '../utils/helpers';
+import { LOCAL_LOGIN, LOCAL_SIGNUP } from '../graphql/mutations';
 
-export const localSignup = (
-  { email, password, firstName, lastName },
-  history
-) => async dispatch => {
+export const localSignup = (input, history) => async dispatch => {
   dispatch({ type: CLIENT_ERRORS, payload: null });
+
   try {
-    const res = await axios.post('/auth/localSignup', {
-      email,
-      password,
-      firstName,
-      lastName
+    const { localSignup } = await GQL({
+      query: LOCAL_SIGNUP,
+      variables: { input }
     });
-
-    const { user } = res.data;
-
-    if (user) {
+    if (localSignup) {
       dispatch({
         type: FETCH_USER,
-        payload: user
+        payload: localSignup
       });
       history.push('/addProperty');
     }
-  } catch ({ response }) {
+  } catch (err) {
     dispatch({
       type: CLIENT_ERRORS,
-      payload: response.data
+      payload: { localLogin: err[0].message } // component has a prop looking for localLogin
     });
   }
 };
 
-export const localLogin = (
-  { email, password, firstName, lastName },
-  history
-) => async dispatch => {
-  dispatch({ type: CLIENT_ERRORS, payload: null }); // reset errors.
+export const localLogin = (input, history) => async dispatch => {
+  dispatch({ type: CLIENT_ERRORS, payload: null });
+  const query = {
+    query: LOCAL_LOGIN,
+    variables: { input }
+  };
+
   try {
-    const res = await axios.post('/auth/localLogin', {
-      email,
-      password
+    const { localLogin } = await GQL(query);
+    dispatch({
+      type: FETCH_USER,
+      payload: localLogin
     });
-
-    const { user } = res.data;
-
-    if (user) {
-      const propertyRes = await axios.get('/api/property');
-      dispatch({
-        type: FETCH_USER,
-        payload: user
-      });
-      dispatch({ type: FETCH_MY_PROPERTIES, payload: propertyRes.data });
+    if (localLogin && localLogin.properties) {
+      dispatch({ type: FETCH_MY_PROPERTIES, payload: localLogin.properties });
     }
   } catch ({ response }) {
-    console.log('signupError', response.data);
+    console.log('login error', response.data);
     dispatch({
       type: CLIENT_ERRORS,
       payload: { localLogin: response.data.message }

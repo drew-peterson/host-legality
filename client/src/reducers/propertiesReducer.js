@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import {
   SAVE_PROPERTY,
   FETCH_MY_PROPERTIES,
@@ -10,7 +11,7 @@ export default (state = null, action) => {
     case SAVE_PROPERTY:
       return { ...state, [action.payload._id]: action.payload };
     case FETCH_MY_PROPERTIES:
-      return action.payload;
+      return _.keyBy(action.payload, p => p._id); // normalize data
     case MAKE_PAYMENT_PROPERTY:
       return { ...state, [action.payload._id]: action.payload };
     case FLOW_SUBMIT_STEP:

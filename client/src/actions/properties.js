@@ -1,45 +1,60 @@
-import axios from 'axios';
 import {
-  FETCH_MY_PROPERTIES,
+  // FETCH_MY_PROPERTIES,
   SAVE_PROPERTY,
   MAKE_PAYMENT_PROPERTY,
   CLIENT_ERRORS
 } from './types';
 
-export const fetchMyProperties = () => async dispatch => {
-  const res = await axios.get('/api/property');
-  dispatch({ type: FETCH_MY_PROPERTIES, payload: res.data });
+import { GQL } from '../utils/helpers';
+import {
+  SAVE_PROPERTY_MUTATION,
+  STRIPE_PROPERTY_PAYMENT
+} from '../graphql/mutations';
+
+// export const fetchMyProperties = () => async dispatch => {
+//   console.log('fetchMyProperties', fetchMyProperties);
+//   // graphql properties...
+//   const res = await axios.get('/api/property');
+//   dispatch({ type: FETCH_MY_PROPERTIES, payload: res.data });
+// };
+
+export const saveProperty = (input, history) => async dispatch => {
+  try {
+    const { saveProperty } = await GQL({
+      query: SAVE_PROPERTY_MUTATION,
+      variables: { input }
+    });
+    dispatch({ type: SAVE_PROPERTY, payload: saveProperty });
+    history.push('/dashboard');
+  } catch (err) {
+    console.log('saveProperty err', err);
+  }
 };
 
-export const saveProperty = (values, history) => async dispatch => {
-  const res = await axios.post('/api/property', values);
-  dispatch({ type: SAVE_PROPERTY, payload: res.data });
-  history.push('/dashboard');
-};
-
-export const selectProperty = propertyId => async dispatch => {
-  console.log('propertyId', propertyId);
+export const selectProperty = propertyID => async dispatch => {
+  console.log('propertyID', propertyID);
   // const res = await axios.get('/api/current_user');
   // dispatch({ type: FETCH_USER, payload: res.data });
 };
 
 export const makePaymentProperty = ({
-  token,
-  amount,
-  description,
-  property,
+  propertyID,
+  stripe,
   history
 }) => async dispatch => {
+  const query = {
+    variables: {
+      propertyID,
+      stripe
+    },
+    query: STRIPE_PROPERTY_PAYMENT
+  };
   try {
-    const res = await axios.post('/api/property/makePayment', {
-      token,
-      amount,
-      description,
-      property
-    });
+    const { propertyMakePayment } = await GQL(query);
     history.push('/dashboard');
-    dispatch({ type: MAKE_PAYMENT_PROPERTY, payload: res.data });
+    dispatch({ type: MAKE_PAYMENT_PROPERTY, payload: propertyMakePayment });
   } catch (err) {
+    console.log('err', err);
     dispatch({ type: CLIENT_ERRORS, payload: err });
   }
 };

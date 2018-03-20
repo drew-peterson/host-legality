@@ -7,7 +7,8 @@ import styled from 'styled-components';
 
 class Header extends Component {
   renderContent() {
-    switch (this.props.auth) {
+    const { auth } = this.props;
+    switch (auth) {
       case null:
         return;
       case false:
@@ -21,11 +22,15 @@ class Header extends Component {
         ];
       default:
         return [
-          <Link style={{ marginRight: '15px' }} to="/dashboard" key="1">
+          auth.admin && (
+            <Link style={{ marginRight: '15px' }} key="1" to="/admin">
+              admin
+            </Link>
+          ),
+          <Link style={{ marginRight: '15px' }} to="/dashboard" key="2">
             dashboard
           </Link>,
-
-          <a href="/api/logout" key="2">
+          <a href="/api/logout" key="3">
             logout
           </a>
         ];
