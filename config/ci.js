@@ -19,7 +19,9 @@ module.exports = {
   googleClientSecret: process.env.googleClientSecret,
   // FACEBOOK_APP_ID: process.env.FACEBOOK_APP_ID,
   // FACEBOOK_APP_SECRET: process.env.FACEBOOK_APP_SECRET,
-  MONGO_URI: process.env.MONGO_URI,
+  // MONGO_URI: process.env.MONGO_URI,
+  MONGO_URI:
+    'mongodb://drew.peterson:BEtbojtodEbJaf2@ds213239.mlab.com:13239/host-legality-dev',
   COOKIE_KEY: process.env.COOKIE_KEY,
   STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY,
   STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,

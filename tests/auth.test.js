@@ -8,7 +8,7 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
-  await page.close();
+  // await page.close();
 });
 
 describe('Signup: ', () => {
@@ -80,18 +80,18 @@ describe('Login', () => {
   });
 });
 
-// describe('Password Reset', () => {
-//   beforeEach(async () => {
-//     await page.goto('http://localhost:3000/forgotPassword');
-//   });
-//
-//   test('submit with email shows success message', async () => {
-//     await page.type('#email', 'test@test.com');
-//     await page.click('button');
-//     await page.waitFor('p');
-//     const text = await page.getContentsOf('p');
-//     expect(text).toEqual(
-//       'Password reset link was sent to email: test@test.com'
-//     );
-//   });
-// });
+describe('Password Reset', () => {
+  beforeEach(async () => {
+    await page.goto('http://localhost:3000/forgotPassword');
+  });
+
+  test.only('submit with email shows success message', async () => {
+    await page.type('#email', 'test@tesreee3et.com');
+    await page.click('button');
+    await page.waitFor('p');
+    const text = await page.getContentsOf('p');
+    expect(text).toEqual(
+      'Password reset link was sent to email: test@test.com'
+    );
+  });
+});

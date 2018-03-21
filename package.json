@@ -23,7 +23,7 @@
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "dev-test":
-      "concurrently \"NODE_ENV=test node index.js\" \"npm run client\"",
+      "concurrently \"NODE_ENV=test nodemon index.js\" \"npm run client\"",
     "build":
       "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "webhook": "./sendgrid_webhook.sh",
