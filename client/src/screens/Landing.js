@@ -42,7 +42,8 @@ const Landing = props => {
           <Row>
             <Col xs={12}>
               <H1 style={styles.header1}>
-                Let us worry about your hosting legality and compliance
+                Let us worry about your hosting legality and compliance -- drew
+                P
               </H1>
             </Col>
             <Col xs={12}>

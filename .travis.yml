@@ -1,26 +1,27 @@
 language: node_js
 node_js:
-  - "8"
+- '8'
 dist: trusty
-# need to tell travis to use its own local mongo and redis-server
 services:
-  - mongodb
-# set the node envioronment variables to be used in project
-# tell express to start on port 3000 && set node env to ci -- needs to be on same line!!!
+- mongodb
 env:
-  - NODE_ENV=ci PORT=3000
-#tell travis to use cache version of node_modules so it doesnt install each time
+- NODE_ENV=ci PORT=3000
 cache:
   directories:
-    - node_modules
-    - client/node_modules
-# look at package.json how we install
+  - node_modules
+  - client/node_modules
 install:
-  - npm install
-  - npm run build
-# noup: if shell is closed, dont kill anything this command creates
-# &: run this command in background - works without noup...
+- npm install
+- npm run build
 script:
-  - nohup npm run start &
-  - sleep 3
-  - npm run test
+- nohup npm run start &
+- sleep 3
+- npm run test
+deploy:
+  provider: heroku
+  api_key:
+    secure: CIobLi+S7uWXeeepf5BjwlmPe24SVm5cvhhNiSVmTXFA1Q65vOkWNETyZj6JsKmYF5N3PgGaVxkt+p699IkdXW+L4GTOKXWaRILCfrYPlKvXJtiZx3J/6IN9OxJQcqpTTdn3pMDudM4uz7tPUhySoSI4zTvCQwaExsH5jIpfVEippJ3vMzpYn4i6dluIifWiMCysegSdBv29/453Py70V2L+3OXt5/xZMfmhzJifX635ElUA+dSm0L/XopNsMaqivcZuanN4RlySCSjLPl8uazeyt9AbKiHsSg0OxZeYRV2LcO1aWdP3evZtf+4PV9aPCEswSlZIuqqEvrPCVWcpolZ8czX2kReI9zalt+RWm4irUoMEjQTinN8aLX5L8kKD8Ous2RhW6emzVAQKmltursLEf1yv2HlWkYthK08jnFEs8s8S9rZrVstjxYitR8nWkd47jO8QEBPklt1+25a8z+aMOlokaowYOHtNYEHCXwC6HqR2uceiip6WGX+91/aiXetNjLY7jrXnjaMO3BYJP+oyo9XBDFzeNjY1up8Jmv97fcrv28P4fEYGKk0NgTVYKlSt7TXMwt6a6GBdWy9pJ6Jw4EBNh7gf2ur1Cs34bwpRbv4dzqQC0nqwoQ1FUxk9FfHrvltBCQQXtvE4nChC/OJQxBVdwZyRv36y+VfWn38=
+  app: host-legality
+  on:
+    repo: weeznog/host-legality
+    all_branches: true
