@@ -8,7 +8,7 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
-  // await page.close();
+  await page.close();
 });
 
 describe('Signup: ', () => {
@@ -31,7 +31,8 @@ describe('Signup: ', () => {
   });
 
   test('Valid values successfull submit and redirect to addProperty', async () => {
-    await page.type('#email', faker.internet.email());
+    const email = 'test_' + Math.random() + '@test.com';
+    await page.type('#email', email);
     await page.type('#password', 'test');
     await page.click('button[type=submit'); // submit button
     await page.waitFor('#addProperty');
@@ -39,8 +40,8 @@ describe('Signup: ', () => {
     expect(text).toEqual('Address of property');
   });
 
-  // test('Signup > logout > login successfull', async () => {
-  //   const email = faker.internet.email();
+  // test.only('Signup > logout > login successfull', async () => {
+  //   const email = 'test_' + Math.random() + '@test.com';
   //   await page.type('#email', email);
   //   await page.type('#password', 'test');
   //   await page.click('button[type=submit'); // submit button
@@ -78,6 +79,31 @@ describe('Login', () => {
     const text = await page.getContentsOf('h2');
     expect(text).toEqual('Forgot Password');
   });
+
+  test('login successfull', async () => {
+    await page.type('#email', 'test@test.com'); // existing user
+    await page.type('#password', 'test');
+    await page.click('button[type=submit');
+    await page.waitFor('a[href="/addProperty"]');
+    const text = await page.getContentsOf('h1');
+    expect(text).toEqual('My Properties');
+  });
+
+  test('With invalid credentials show error', async () => {
+    await page.type('#email', 'tNOTREALEMAIL@test.com'); // existing user
+    await page.type('#password', 'test');
+    await page.click('button[type=submit');
+    await page.waitFor('.auth-error');
+    const text = await page.getContentsOf('.auth-error');
+    expect(text).toEqual('Invalid credentials.');
+  });
+
+  test('With no credentials show error', async () => {
+    await page.click('button[type=submit');
+    await page.waitFor('.auth-error');
+    const text = await page.getContentsOf('.auth-error');
+    expect(text).toEqual('Valid credentials required');
+  });
 });
 
 describe('Password Reset', () => {
@@ -85,13 +111,21 @@ describe('Password Reset', () => {
     await page.goto('http://localhost:3000/forgotPassword');
   });
 
-  test('submit with email shows success message', async () => {
-    await page.type('#email', 'test@test.com');
+  test('submit with correct email shows success message', async () => {
+    await page.type('#email', 'test@test.com'); // save in mlabs test
     await page.click('button');
     await page.waitFor('p');
     const text = await page.getContentsOf('p');
     expect(text).toEqual(
       'Password reset link was sent to email: test@test.com'
     );
+  });
+
+  test('submit with incorrect email shows error message', async () => {
+    await page.type('#email', 'NOTREALEMAIL@test.com');
+    await page.click('button');
+    await page.waitFor('p');
+    const text = await page.getContentsOf('p');
+    expect(text).toEqual('No user found with email: NOTREALEMAIL@test.com');
   });
 });

@@ -45,11 +45,13 @@ export const localLogin = (input, history) => async dispatch => {
     if (localLogin && localLogin.properties) {
       dispatch({ type: FETCH_MY_PROPERTIES, payload: localLogin.properties });
     }
-  } catch ({ response }) {
-    console.log('login error', response.data);
+    // } catch ({ response }) {
+  } catch (err) {
     dispatch({
       type: CLIENT_ERRORS,
-      payload: { localLogin: response.data.message }
+      payload: {
+        localLogin: err.errors ? 'Valid credentials required' : err[0].message
+      }
     });
   }
 };
