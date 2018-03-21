@@ -10,7 +10,6 @@ import { Input, Button, rem } from '../components/common';
 class AuthForm extends Component {
   render() {
     const { handleSubmit, errors, btnText, oAuthType } = this.props;
-    const test = 'drew';
 
     return (
       <LoginWrap>
