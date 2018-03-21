@@ -25,7 +25,7 @@ module.exports = {
   COOKIE_KEY: process.env.COOKIE_KEY,
   STRIPE_PUBLISHABLE_KEY: process.env.STRIPE_PUBLISHABLE_KEY,
   STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
-  REDIS_URL: process.env.REDIS_URL
-  // SENDGRID_KEY: process.env.SENDGRID_KEY,
-  // REDIRECT_DOMAIN: process.env.REDIRECT_DOMAIN
+  REDIS_URL: process.env.REDIS_URL,
+  SENDGRID_KEY: process.env.SENDGRID_KEY,
+  REDIRECT_DOMAIN: process.env.REDIRECT_DOMAIN
 };
