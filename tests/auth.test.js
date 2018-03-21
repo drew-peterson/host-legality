@@ -39,22 +39,22 @@ describe('Signup: ', () => {
     expect(text).toEqual('Address of property');
   });
 
-  test('Signup > logout > login successfull', async () => {
-    const email = faker.internet.email();
-    await page.type('#email', email);
-    await page.type('#password', 'test');
-    await page.click('button[type=submit'); // submit button
-    await page.waitFor('#addProperty');
-    await page.click('#logout-nav');
-    await page.goto('localhost:3000/login');
-    await page.waitFor('a[href="/forgotPassword"]');
-    await page.type('#email', email);
-    await page.type('#password', 'test');
-    await page.click('button[type=submit'); // submit button
-    await page.waitFor('a[href="/addProperty"]');
-    const text = await page.getContentsOf('h1');
-    expect(text).toEqual('My Properties');
-  });
+  // test('Signup > logout > login successfull', async () => {
+  //   const email = faker.internet.email();
+  //   await page.type('#email', email);
+  //   await page.type('#password', 'test');
+  //   await page.click('button[type=submit'); // submit button
+  //   await page.waitFor('#addProperty');
+  //   await page.click('#logout-nav');
+  //   await page.goto('localhost:3000/login');
+  //   await page.waitFor('a[href="/forgotPassword"]');
+  //   await page.type('#email', email);
+  //   await page.type('#password', 'test');
+  //   await page.click('button[type=submit'); // submit button
+  //   await page.waitFor('a[href="/addProperty"]');
+  //   const text = await page.getContentsOf('h1');
+  //   expect(text).toEqual('My Properties');
+  // });
 });
 
 describe('Login', () => {
