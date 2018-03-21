@@ -86,7 +86,7 @@ describe('Password Reset', () => {
   });
 
   test.only('submit with email shows success message', async () => {
-    await page.type('#email', 'test@tesreee3et.com');
+    await page.type('#email', 'test@test.com');
     await page.click('button');
     await page.waitFor('p');
     const text = await page.getContentsOf('p');
