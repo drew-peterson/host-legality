@@ -85,7 +85,7 @@ describe('Password Reset', () => {
     await page.goto('http://localhost:3000/forgotPassword');
   });
 
-  test.only('submit with email shows success message', async () => {
+  test('submit with email shows success message', async () => {
     await page.type('#email', 'test@test.com');
     await page.click('button');
     await page.waitFor('p');
