@@ -18,10 +18,17 @@ script:
 - sleep 3
 - npm run test
 deploy:
-  provider: heroku
-  api_key:
+  - provider: heroku
+    api_key:
     secure: CIobLi+S7uWXeeepf5BjwlmPe24SVm5cvhhNiSVmTXFA1Q65vOkWNETyZj6JsKmYF5N3PgGaVxkt+p699IkdXW+L4GTOKXWaRILCfrYPlKvXJtiZx3J/6IN9OxJQcqpTTdn3pMDudM4uz7tPUhySoSI4zTvCQwaExsH5jIpfVEippJ3vMzpYn4i6dluIifWiMCysegSdBv29/453Py70V2L+3OXt5/xZMfmhzJifX635ElUA+dSm0L/XopNsMaqivcZuanN4RlySCSjLPl8uazeyt9AbKiHsSg0OxZeYRV2LcO1aWdP3evZtf+4PV9aPCEswSlZIuqqEvrPCVWcpolZ8czX2kReI9zalt+RWm4irUoMEjQTinN8aLX5L8kKD8Ous2RhW6emzVAQKmltursLEf1yv2HlWkYthK08jnFEs8s8S9rZrVstjxYitR8nWkd47jO8QEBPklt1+25a8z+aMOlokaowYOHtNYEHCXwC6HqR2uceiip6WGX+91/aiXetNjLY7jrXnjaMO3BYJP+oyo9XBDFzeNjY1up8Jmv97fcrv28P4fEYGKk0NgTVYKlSt7TXMwt6a6GBdWy9pJ6Jw4EBNh7gf2ur1Cs34bwpRbv4dzqQC0nqwoQ1FUxk9FfHrvltBCQQXtvE4nChC/OJQxBVdwZyRv36y+VfWn38=
-  app: host-legality
-  on:
-    repo: weeznog/host-legality
-    all_branches: true
+    app: host-legality
+    on:
+      repo: weeznog/host-legality
+      branch: master
+  - provider: heroku
+    api_key:
+    secure: CIobLi+S7uWXeeepf5BjwlmPe24SVm5cvhhNiSVmTXFA1Q65vOkWNETyZj6JsKmYF5N3PgGaVxkt+p699IkdXW+L4GTOKXWaRILCfrYPlKvXJtiZx3J/6IN9OxJQcqpTTdn3pMDudM4uz7tPUhySoSI4zTvCQwaExsH5jIpfVEippJ3vMzpYn4i6dluIifWiMCysegSdBv29/453Py70V2L+3OXt5/xZMfmhzJifX635ElUA+dSm0L/XopNsMaqivcZuanN4RlySCSjLPl8uazeyt9AbKiHsSg0OxZeYRV2LcO1aWdP3evZtf+4PV9aPCEswSlZIuqqEvrPCVWcpolZ8czX2kReI9zalt+RWm4irUoMEjQTinN8aLX5L8kKD8Ous2RhW6emzVAQKmltursLEf1yv2HlWkYthK08jnFEs8s8S9rZrVstjxYitR8nWkd47jO8QEBPklt1+25a8z+aMOlokaowYOHtNYEHCXwC6HqR2uceiip6WGX+91/aiXetNjLY7jrXnjaMO3BYJP+oyo9XBDFzeNjY1up8Jmv97fcrv28P4fEYGKk0NgTVYKlSt7TXMwt6a6GBdWy9pJ6Jw4EBNh7gf2ur1Cs34bwpRbv4dzqQC0nqwoQ1FUxk9FfHrvltBCQQXtvE4nChC/OJQxBVdwZyRv36y+VfWn38=
+    app: host-legality-staging
+    on:
+      repo: weeznog/host-legality
+      branch: staging
