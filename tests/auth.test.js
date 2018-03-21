@@ -16,12 +16,19 @@ describe('Signup: ', () => {
     await page.goto('http://localhost:3000/signup');
   });
 
-  test('Invalid form values displays error', async () => {
-    await page.click('button[type=submit'); // submit button
-    await page.waitFor('.auth-error');
-    const text = await page.getContentsOf('.auth-error');
+  test('focus email and password and submit will show error messages', async () => {
+    await page.type('#email', ' ');
+    await page.type('#password', '');
+    await page.type('#email', ' ');
+    const eSelector = 'form > div:nth-child(1) > div:nth-child(5)';
+    const pSelector = 'form > div:nth-child(2) > div:nth-child(5)';
+    await page.waitFor(eSelector);
+    await page.waitFor(pSelector);
+    const pText = await page.getContentsOf(pSelector);
+    const eText = await page.getContentsOf(eSelector);
 
-    expect(text).toEqual('Valid credentials required');
+    expect(pText).toEqual('password is a required field');
+    expect(eText).toEqual('email is a required field');
   });
 
   test('Click google takes to to google oauth flow', async () => {
@@ -81,11 +88,28 @@ describe('Login', () => {
     expect(text).toEqual('Invalid credentials.');
   });
 
-  test('With no credentials show error', async () => {
-    await page.click('button[type=submit');
-    await page.waitFor('.auth-error');
-    const text = await page.getContentsOf('.auth-error');
-    expect(text).toEqual('Valid credentials required');
+  test('With invalid email show error', async () => {
+    const eSelector = 'form > div:nth-child(1) > div:nth-child(5)';
+    await page.type('#email', 'test');
+    await page.type('#password', ' ');
+    await page.waitFor(eSelector);
+    const text = await page.getContentsOf(eSelector);
+    expect(text).toEqual('email must be a valid email');
+  });
+
+  test('focus email and password and submit will show error messages', async () => {
+    await page.type('#email', ' ');
+    await page.type('#password', '');
+    await page.type('#email', ' ');
+    const eSelector = 'form > div:nth-child(1) > div:nth-child(5)';
+    const pSelector = 'form > div:nth-child(2) > div:nth-child(5)';
+    await page.waitFor(eSelector);
+    await page.waitFor(pSelector);
+    const pText = await page.getContentsOf(pSelector);
+    const eText = await page.getContentsOf(eSelector);
+
+    expect(pText).toEqual('password is a required field');
+    expect(eText).toEqual('email is a required field');
   });
 });
 

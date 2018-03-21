@@ -100,7 +100,7 @@ function mapStateToProps({ errors }) {
   return { errors };
 }
 
-async function asyncValidate({ password, email }) {
+async function asyncValidate(values) {
   const errors = {};
   const schema = yup.object().shape({
     email: yup
@@ -110,16 +110,15 @@ async function asyncValidate({ password, email }) {
     password: yup.string().required()
   });
 
-  const _email = await schema.isValid(email);
-  const _password = await schema.isValid(password);
-
-  if (!_password) {
-    errors.password = 'Password is required';
+  try {
+    await schema.validate(values, { abortEarly: false });
+    return errors;
+  } catch ({ inner }) {
+    inner.forEach(({ path, message }) => {
+      errors[path] = message;
+    });
+    return errors;
   }
-  if (!_email) {
-    errors.email = 'Email is required';
-  }
-  return errors;
 }
 
 // form name passed in props
