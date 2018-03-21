@@ -8,17 +8,18 @@ const Input = ({
   placeholder,
   className,
   defaultValue,
+  required,
   meta: { touched, error }
 }) => {
-  // {/* <TextInput {...input} s={6} type={type} id={input.name} />
-  // {touched && error && <div className="red-text">{error}</div>} */}
+  const errorMessage = touched && error ? error : '';
   return (
     <TextField
       {...input}
       type={type}
       id={input.name}
+      required={required}
       hintText={placeholder}
-      errorText={error}
+      errorText={errorMessage}
       fullWidth={true}
       floatingLabelText={label}
       floatingLabelFixed={true}

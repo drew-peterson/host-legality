@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import yup from 'yup';
 import styled from 'styled-components';
 
 import * as actions from '../actions';
@@ -9,7 +10,15 @@ import { Input, Button, rem } from '../components/common';
 
 class AuthForm extends Component {
   render() {
-    const { handleSubmit, errors, btnText, oAuthType } = this.props;
+    const {
+      handleSubmit,
+      errors,
+      btnText,
+      oAuthType,
+      invalid,
+      pristine,
+      submitting
+    } = this.props;
 
     return (
       <LoginWrap>
@@ -38,7 +47,12 @@ class AuthForm extends Component {
             name="password"
             placeholder="enter your password"
           />
-          <Button style={styles.btnStyle} type="submit" name="action">
+          <Button
+            style={styles.btnStyle}
+            type="submit"
+            name="action"
+            disabled={invalid || submitting || pristine}
+          >
             {btnText}
           </Button>
 
@@ -86,7 +100,29 @@ function mapStateToProps({ errors }) {
   return { errors };
 }
 
+async function asyncValidate({ password, email }) {
+  const errors = {};
+  const schema = yup.object().shape({
+    email: yup
+      .string()
+      .email()
+      .required(),
+    password: yup.string().required()
+  });
+
+  const _email = await schema.isValid(email);
+  const _password = await schema.isValid(password);
+
+  if (!_password) {
+    errors.password = 'Password is required';
+  }
+  if (!_email) {
+    errors.email = 'Email is required';
+  }
+  return errors;
+}
+
 // form name passed in props
-AuthForm = reduxForm({})(AuthForm);
+AuthForm = reduxForm({ asyncValidate })(AuthForm);
 
 export default connect(mapStateToProps, actions)(withRouter(AuthForm));

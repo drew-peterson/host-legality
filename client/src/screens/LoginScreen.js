@@ -2,7 +2,7 @@ import React from 'react';
 
 import LoginContainer from '../containers/LoginContainer';
 import { Link } from 'react-router-dom';
-import { Container, H1 } from '../components/common';
+import { Container, H1, rem } from '../components/common';
 import styled from 'styled-components';
 
 const LoginScreen = () => {
@@ -20,6 +20,7 @@ const LoginScreen = () => {
 const BtnWrap = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: ${rem(25)};
 `;
 
 export default LoginScreen;
