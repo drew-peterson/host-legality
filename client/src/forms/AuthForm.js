@@ -123,5 +123,4 @@ async function asyncValidate(values) {
 
 // form name passed in props
 AuthForm = reduxForm({ asyncValidate })(AuthForm);
-
 export default connect(mapStateToProps, actions)(withRouter(AuthForm));
