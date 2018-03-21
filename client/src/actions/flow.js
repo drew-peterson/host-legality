@@ -8,9 +8,8 @@ export const flowSubmitStep = variables => async dispatch => {
       query: FLOW_UPDATE,
       variables
     });
-    console.log('flowUpdate', flowUpdate);
     dispatch({ type: FLOW_SUBMIT_STEP, payload: flowUpdate });
   } catch (err) {
-    console.log('err', err);
+    console.log('flowSubmitStep err', err);
   }
 };

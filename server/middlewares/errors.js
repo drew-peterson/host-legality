@@ -1,10 +1,10 @@
 module.exports = {
   logErrors: (err, req, res, next) => {
-    console.log('*** SERVER ERROR ***');
+    // console.log('*** SERVER ERROR ***');
     if (err.stack) {
-      console.error(err.stack);
+      // console.error(err.stack);
     } else {
-      console.error(err);
+      // console.error(err);
     }
     next(err);
   },

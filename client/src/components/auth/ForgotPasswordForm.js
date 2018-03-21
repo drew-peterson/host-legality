@@ -13,11 +13,9 @@ class ForgotPasswordForm extends Component {
   async onFormSubmit({ email }) {
     try {
       const res = await axios.post('/auth/forgotPassword', { email });
-      console.log('res', res.data);
       this.setState({ success: res.data, errors: null });
     } catch ({ response }) {
       this.setState({ errors: response.data.err });
-      console.log('err', response.data);
     }
   }
 

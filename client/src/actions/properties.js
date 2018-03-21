@@ -54,7 +54,6 @@ export const makePaymentProperty = ({
     history.push('/dashboard');
     dispatch({ type: MAKE_PAYMENT_PROPERTY, payload: propertyMakePayment });
   } catch (err) {
-    console.log('err', err);
     dispatch({ type: CLIENT_ERRORS, payload: err });
   }
 };

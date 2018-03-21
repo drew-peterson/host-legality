@@ -5,7 +5,6 @@ import _ from 'lodash';
 
 class NewHost extends Component {
   onSubmit(values) {
-    console.log('values', values);
     const steps = {};
     const host = {
       host: '',
@@ -42,7 +41,6 @@ class NewHost extends Component {
       }
     });
     host.steps = steps;
-    console.log('host', host);
   }
   render() {
     return <NewHostForm onSubmit={this.onSubmit.bind(this)} />;

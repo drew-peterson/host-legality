@@ -19,9 +19,7 @@ module.exports = app => {
 
   // redirect to specific route after passport strategy is model getting user model
   app.get('/auth/google/callback', googleOAuthCb, (req, res) => {
-    // console.log('GOOGLE', req.user);
     const oAuthType = app.get('oAuthType');
-    console.log('oAuthType', oAuthType);
     if (oAuthType === 'login') {
       return res.redirect('/login');
     }

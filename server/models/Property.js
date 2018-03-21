@@ -48,7 +48,9 @@ propertySchema.pre('findOneAndUpdate', findOneAndUpdate);
 
 function save(next) {
   const property = this;
-  property.address = _.replace(property.address, ', USA', '');
+  if (property.isModified('address')) {
+    property.address = _.replace(property.address, ', USA', '');
+  }
   next();
 }
 function find(next) {

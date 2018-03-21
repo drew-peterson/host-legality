@@ -46,7 +46,6 @@ class FlowContainer extends Component {
   }
 
   render() {
-    console.log('this.props', this.props);
     return this.switchForm();
   }
 }

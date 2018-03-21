@@ -28,9 +28,13 @@ const userSchema = new Schema({
 //On save hook, encrypt password
 userSchema.pre('save', function(next) {
   const user = this;
-  if (!user.password) {
+
+  // if password is new or modfied bycrupt else return now
+  // help with model.save() which will trigger this hoook...
+  if (!user.isModified('password')) {
     next();
   }
+
   bcrypt.genSalt(10, function(err, salt) {
     if (err) {
       return next(err);
