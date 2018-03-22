@@ -21,7 +21,7 @@ beforeAll(async () => {
   //     password: 'test'
   //   }).save();
   // }
-  return User.findOneOrCreate({ email: 'test@test.com' });
+  return await User.findOneOrCreate({ email: 'test@test.com' });
 });
 
 // afterAll(async () => {
