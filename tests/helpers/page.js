@@ -8,10 +8,10 @@ class CustomPage {
   static async build() {
     const env = process.env.NODE_ENV;
     let options;
-    if (env === 'test') {
+    if (['test', 'development'].includes(env)) {
       options = {
-        headless: false
-        // slowMo: 20 // slow down by 20ms
+        headless: false,
+        slowMo: 20 // slow down by 20ms
       };
     } else {
       options = {
