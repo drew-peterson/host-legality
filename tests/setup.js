@@ -1,4 +1,4 @@
-jest.setTimeout(10000); // tell jest how long to wait until failing test. default is 5sec this is 30sec
+jest.setTimeout(30000); // tell jest how long to wait until failing test. default is 5sec this is 30sec
 
 // tell jest to run this file first > package.json
 // "jest": {
