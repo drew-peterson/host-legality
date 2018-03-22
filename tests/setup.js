@@ -14,6 +14,9 @@ mongoose.connect(keys.MONGO_URI);
 // create base test user...
 const User = mongoose.model('User');
 User.findOne({ email: 'test@test.com' }).then(user => {
+  console.log('*********************************');
+  console.log('TEST@TEST.COM EXISTS');
+  console.log('*********************************');
   if (!user) {
     console.log('*********************************');
     console.log('CREATE TEST@TEST.COM');
