@@ -1,5 +1,7 @@
 const Page = require('./helpers/page');
 const faker = require('faker');
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
 let page;
 beforeEach(async () => {
   page = await Page.build();
@@ -72,7 +74,8 @@ describe('Login', () => {
   });
 
   test('login successfull', async () => {
-    await page.type('#email', 'test@test.com'); // existing user
+    const { email } = await page.newUser();
+    await page.type('#email', email);
     await page.type('#password', 'test');
     await page.waitFor('button[type=submit]:enabled');
     await page.click('button[type=submit');
@@ -82,7 +85,7 @@ describe('Login', () => {
   });
 
   test('With invalid credentials show error', async () => {
-    await page.type('#email', 'tNOTREALEMAIL@test.com'); // existing user
+    await page.type('#email', 'NOTREALEMAIL@test.com'); // existing user
     await page.type('#password', 'test');
     await page.click('button[type=submit');
     await page.waitFor('.auth-error');
@@ -121,13 +124,12 @@ describe('Password Reset', () => {
   });
 
   test('submit with correct email shows success message', async () => {
-    await page.type('#email', 'test@test.com'); // save in mlabs test
+    const { email } = await page.newUser();
+    await page.type('#email', email); // save in mlabs test
     await page.click('button');
     await page.waitFor('p');
     const text = await page.getContentsOf('p');
-    expect(text).toEqual(
-      'Password reset link was sent to email: test@test.com'
-    );
+    expect(text).toEqual('Password reset link was sent to email: ' + email);
   });
 
   test('submit with incorrect email shows error message', async () => {

@@ -6,12 +6,21 @@ class CustomPage {
   // cannot call a static method on class from outside class
   // called without creating a instance of CustomPage
   static async build() {
-    const browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox']
-      // headless: false // false for testing
-      // slowMo: 250 // slow down by 250ms
-    });
+    const env = process.env.NODE_ENV;
+    let options;
+    if (env === 'test') {
+      options = {
+        headless: false
+        // slowMo: 20 // slow down by 20ms
+      };
+    } else {
+      options = {
+        headless: true,
+        args: ['--no-sandbox']
+      };
+    }
+
+    const browser = await puppeteer.launch(options);
 
     const page = await browser.newPage();
     const customPage = new CustomPage(page);
@@ -90,6 +99,10 @@ class CustomPage {
         return this[method](path, data);
       })
     );
+  }
+
+  newUser() {
+    return userFactory();
   }
 }
 
