@@ -6,6 +6,8 @@ dist: trusty
 # - mongodb
 env:
 - NODE_ENV=ci PORT=3000
+notifications:
+  email: false
 cache:
   directories:
   - node_modules
