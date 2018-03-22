@@ -49,7 +49,7 @@ describe('Add Property Step 1:', () => {
 
   describe('Add property step 2:', () => {
     beforeEach(async () => {
-      await page.type('#PlacesAutocomplete__root', '120 merion ter');
+      await page.type('#PlacesAutocomplete__root', '120 merion terrace moraga');
       await page.waitFor('#PlacesAutocomplete__autocomplete-container');
       await page.click('#PlacesAutocomplete__autocomplete-container div'); // select option...
       await page.type('#unitNumber', '333');

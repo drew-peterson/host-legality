@@ -9,7 +9,8 @@ class CustomPage {
     const browser = await puppeteer.launch({
       headless: true,
       args: ['--no-sandbox']
-      // headless: false // false for testing
+      // headless: false, // false for testing
+      // slowMo: 250 // slow down by 250ms
     });
 
     const page = await browser.newPage();
