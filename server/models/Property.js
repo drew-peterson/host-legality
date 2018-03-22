@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-const User = mongoose.model('User');
 const _ = require('lodash');
 // const Host = mongoose.model('Host');
+const User = mongoose.model('User');
 
 const propertySchema = new Schema({
   address: {
@@ -55,7 +55,8 @@ function save(next) {
 }
 function find(next) {
   const property = this;
-  property.populate('_user');
+  // not need becuse of graphql
+  // property.populate('_user'); // mongoose populate user
   // property.populate(_host);
   next();
 }

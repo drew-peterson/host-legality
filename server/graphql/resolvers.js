@@ -6,6 +6,7 @@ const _ = require('lodash');
 const AuthService = require('../services/passport');
 const stripeChargeCard = require('../services/stripeChargeCard');
 const Property = mongoose.model('property');
+const User = mongoose.model('User');
 
 //model
 
@@ -26,6 +27,11 @@ const resolvers = {
   User: {
     properties: (obj, args, req) => {
       return Property.find({ _user: req.user._id });
+    }
+  },
+  Property: {
+    _user: async ({ _user }, args, req) => {
+      return await User.findById(_user);
     }
   },
   Mutation: {
