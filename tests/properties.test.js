@@ -34,7 +34,8 @@ describe('Add Property Step 1:', () => {
     await page.waitFor('#PlacesAutocomplete__autocomplete-container');
     await page.click('#PlacesAutocomplete__autocomplete-container div'); // select option...
     await page.type('#unitNumber', '333');
-    await page.click('.addPropertyBtn');
+    await page.waitFor('.addPropertyBtn:enabled');
+    await page.click('.addPropertyBtn:enabled');
     await page.waitFor('#airbnb');
     const text = await page.getContentsOf('label');
     expect(text).toEqual('airbnb');
@@ -53,7 +54,8 @@ describe('Add Property Step 1:', () => {
       await page.waitFor('#PlacesAutocomplete__autocomplete-container');
       await page.click('#PlacesAutocomplete__autocomplete-container div'); // select option...
       await page.type('#unitNumber', '333');
-      await page.click('.addPropertyBtn');
+      await page.waitFor('.addPropertyBtn:enabled');
+      await page.click('.addPropertyBtn:enabled');
       await page.waitFor('#airbnb');
     });
 
@@ -65,7 +67,8 @@ describe('Add Property Step 1:', () => {
     });
     test('selecting a host and submitting', async () => {
       await page.click('#airbnb');
-      await page.click('.addPropertyBtn');
+      await page.waitFor('.addPropertyBtn:enabled');
+      await page.click('.addPropertyBtn:enabled');
       await page.waitFor('.propertyItem');
       const textA = await page.getContentsOf('.propertyItem .address');
       const textS = await page.getContentsOf('.propertyItem .status');

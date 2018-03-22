@@ -18,6 +18,7 @@ test('Header has the correct text', async () => {
 });
 
 test('Clicking on sign in takes you to welcome back page', async () => {
+  await page.waitFor('#login-nav');
   await page.click('#login-nav');
   await page.waitFor('form');
   const text = await page.getContentsOf('h1');
@@ -25,6 +26,7 @@ test('Clicking on sign in takes you to welcome back page', async () => {
 });
 
 test('Clicking on get started takes to signup page', async () => {
+  await page.waitFor('#signup-nav');
   await page.click('#signup-nav');
   await page.waitFor('form');
   const text = await page.getContentsOf('h1');
@@ -41,6 +43,7 @@ test('When logged in show dashboard and logout button', async () => {
 
 test('when logout header updates', async () => {
   await page.login();
+  await page.waitFor('#logout-nav');
   await page.click('#logout-nav');
   await page.waitFor('#login-nav');
   const text = await page.getContentsOf('#login-nav');

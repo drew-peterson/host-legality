@@ -10,20 +10,30 @@ require('../server/models');
 const mongoose = require('mongoose');
 const keys = require('../config/keys');
 mongoose.connect(keys.MONGO_URI);
-
-// create base test user...
 const User = mongoose.model('User');
-User.findOne({ email: 'test@test.com' }).then(user => {
-  console.log('*********************************');
-  console.log('TEST@TEST.COM EXISTS');
-  console.log('*********************************');
-  if (!user) {
-    console.log('*********************************');
-    console.log('CREATE TEST@TEST.COM');
-    console.log('*********************************');
-    new User({
+
+beforeAll(async () => {
+  const _user = await User.findOne({ email: 'test@test.com' });
+  if (!_user) {
+    // have to return promise
+    return await new User({
       email: 'test@test.com',
       password: 'test'
     }).save();
   }
 });
+
+// afterAll(async () => {
+// console.log('********************************************');
+
+// need to return Promise -- util.promisify doesnst work...
+// however this causes duplication errors with create above..
+// return new Promise((resolve, reject) => {
+//   mongoose.connection.db.dropDatabase((err, res) => {
+//     if (err) {
+//       return reject(err);
+//     }
+//     return resolve(res);
+//   });
+// });
+// });

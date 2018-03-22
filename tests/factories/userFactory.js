@@ -5,5 +5,6 @@ var faker = require('faker');
 
 module.exports = () => {
   const email = faker.internet.email();
-  return new User({ email }).save();
+  const num = Math.floor(Math.random() * 100);
+  return new User({ email: `test${num}_${email}` }).save();
 };

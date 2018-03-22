@@ -1,6 +1,5 @@
 const Page = require('./helpers/page');
 const faker = require('faker');
-
 let page;
 beforeEach(async () => {
   page = await Page.build();
@@ -38,9 +37,11 @@ describe('Signup: ', () => {
   });
 
   test('Valid values successfull submit and redirect to addProperty', async () => {
-    const email = 'test_' + Math.random() + '@test.com';
-    await page.type('#email', email);
+    const num = Math.floor(Math.random() * 100);
+    const email = faker.internet.email();
+    await page.type('#email', `test${num}_${email}`);
     await page.type('#password', 'test');
+    await page.waitFor('button[type=submit]:enabled');
     await page.click('button[type=submit'); // submit button
     await page.waitFor('#addProperty');
     const text = await page.getContentsOf('label');
@@ -73,6 +74,7 @@ describe('Login', () => {
   test('login successfull', async () => {
     await page.type('#email', 'test@test.com'); // existing user
     await page.type('#password', 'test');
+    await page.waitFor('button[type=submit]:enabled');
     await page.click('button[type=submit');
     await page.waitFor('a[href="/addProperty"]');
     const text = await page.getContentsOf('h1');
