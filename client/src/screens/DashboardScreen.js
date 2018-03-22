@@ -7,7 +7,7 @@ const DashBoardScreen = () => {
   return (
     <Container>
       <H1>My Properties</H1>
-      <ContainerWrap>
+      <ContainerWrap className="containerWrap">
         <PropertyListContainer />
         <BtnWrap>
           <Button to="/addProperty">Add a new property</Button>

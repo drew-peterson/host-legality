@@ -8,7 +8,7 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
-  // await page.close();
+  await page.close();
 });
 
 describe('Dashboard:', () => {
@@ -43,6 +43,7 @@ describe('Add Property Step 1:', () => {
     const text = await page.getContentsOf('#autocomplete_error');
     expect(text).toEqual('valid address is required');
   });
+
   describe('Add property step 2:', () => {
     beforeEach(async () => {
       await page.type('#PlacesAutocomplete__root', '120 merion ter');
@@ -59,10 +60,15 @@ describe('Add Property Step 1:', () => {
       const text = await page.getContentsOf('#host_error');
       expect(text).toEqual('please select a host');
     });
-  });
+    test('selecting a host and submitting', async () => {
+      await page.click('#airbnb');
+      await page.click('.addPropertyBtn');
+      await page.waitFor('.propertyItem');
+      const textA = await page.getContentsOf('.propertyItem .address');
+      const textS = await page.getContentsOf('.propertyItem .status');
 
-  test.only('selecting a host and submitting', async () => {
-    await page.click('#airbnb');
-    await page.click('.addPropertyBtn');
+      expect(textA).toEqual('120 Merion Terrace, Moraga, CA 94556, USA');
+      expect(textS).toEqual('pending-payment');
+    });
   });
 });

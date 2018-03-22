@@ -23,14 +23,14 @@ const PropertyList = props => {
       .map(property => {
         const { status, _id, address } = property;
         return (
-          <PropertyItem key={_id}>
+          <PropertyItem key={_id} className="propertyItem">
             <Link
               style={styles.propertyItemLink}
               to={`${statusRedirect[status]}/${_id}`}
             >
               <PropertyWrap>
-                <PropertyAddress>{address}</PropertyAddress>
-                <PropertyStatus>{status}</PropertyStatus>
+                <PropertyAddress className="address">{address}</PropertyAddress>
+                <PropertyStatus className="status">{status}</PropertyStatus>
               </PropertyWrap>
             </Link>
           </PropertyItem>
