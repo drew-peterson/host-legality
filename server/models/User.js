@@ -62,4 +62,12 @@ userSchema.methods.comparePassword = function(canidatePassword, cb) {
   });
 };
 
+userSchema.static('findOneOrCreate', async function findOneOrCreate(
+  condition,
+  doc
+) {
+  const one = await this.findOne(condition);
+  return one || this.create(doc);
+});
+
 mongoose.model('User', userSchema);

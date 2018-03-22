@@ -26,20 +26,20 @@ describe('Add Property Step 1:', () => {
     await page.waitFor('#PlacesAutocomplete__root');
   });
 
-  test('address and unit number > next step', async () => {
-    await page.type(
-      '#PlacesAutocomplete__root',
-      '120 merion terrace moraga ca'
-    );
-    await page.waitFor('#PlacesAutocomplete__autocomplete-container');
-    await page.click('#PlacesAutocomplete__autocomplete-container div'); // select option...
-    await page.type('#unitNumber', '333');
-    await page.waitFor('.addPropertyBtn:enabled');
-    await page.click('.addPropertyBtn:enabled');
-    await page.waitFor('#airbnb');
-    const text = await page.getContentsOf('label');
-    expect(text).toEqual('airbnb');
-  });
+  // test('address and unit number > next step', async () => {
+  //   await page.type(
+  //     '#PlacesAutocomplete__root',
+  //     '120 merion terrace moraga ca'
+  //   );
+  //   await page.waitFor('#PlacesAutocomplete__autocomplete-container');
+  //   await page.click('#PlacesAutocomplete__autocomplete-container div'); // select option...
+  //   await page.type('#unitNumber', '333');
+  //   await page.waitFor('.addPropertyBtn:enabled');
+  //   await page.click('.addPropertyBtn:enabled');
+  //   await page.waitFor('#airbnb');
+  //   const text = await page.getContentsOf('label');
+  //   expect(text).toEqual('airbnb');
+  // });
 
   test('Address is required and will display error message on next', async () => {
     await page.click('.addPropertyBtn');

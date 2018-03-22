@@ -13,14 +13,15 @@ mongoose.connect(keys.MONGO_URI);
 const User = mongoose.model('User');
 
 beforeAll(async () => {
-  const _user = await User.findOne({ email: 'test@test.com' });
-  if (!_user) {
-    // have to return promise
-    return await new User({
-      email: 'test@test.com',
-      password: 'test'
-    }).save();
-  }
+  // const _user = await User.findOne({ email: 'test@test.com' });
+  // if (!_user) {
+  //   // have to return promise
+  //   return await new User({
+  //     email: 'test@test.com',
+  //     password: 'test'
+  //   }).save();
+  // }
+  return User.findOneOrCreate({ email: 'test@test.com' });
 });
 
 // afterAll(async () => {
