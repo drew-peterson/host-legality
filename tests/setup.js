@@ -12,7 +12,7 @@ const keys = require('../config/keys');
 mongoose.connect(keys.MONGO_URI);
 const User = mongoose.model('User');
 
-beforeAll(async () => {
+beforeAll(() => {
   // const _user = await User.findOne({ email: 'test@test.com' });
   // if (!_user) {
   //   // have to return promise
@@ -21,7 +21,11 @@ beforeAll(async () => {
   //     password: 'test'
   //   }).save();
   // }
-  return await User.findOneOrCreate({ email: 'test@test.com' });
+
+  return new Promise(async resolve => {
+    await User.findOneOrCreate({ email: 'test@test.com' });
+    resolve();
+  });
 });
 
 // afterAll(async () => {
