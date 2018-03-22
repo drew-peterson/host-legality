@@ -14,6 +14,13 @@ class GooleAutoComplete extends React.Component {
     address: ''
   };
 
+  componentDidMount() {
+    const { formatted_address } = this.props.input.value;
+    if (formatted_address) {
+      this.setState({ address: formatted_address });
+    }
+  }
+
   async onSelect(address) {
     this.setState({ address });
     const { meta: { dispatch, form }, input: { name } } = this.props;
@@ -25,11 +32,20 @@ class GooleAutoComplete extends React.Component {
     dispatch(change(form, name, googleData[0]));
   }
 
+  onChange(address) {
+    const { meta: { dispatch, form }, input: { name } } = this.props;
+    this.setState({ address });
+    if (!address) {
+      dispatch(change(form, name, null)); // update form when input is cleared
+    }
+  }
+
   render() {
-    const { placeholder } = this.props;
+    const { placeholder, meta: { touched, error } } = this.props;
     const inputProps = {
       value: this.state.address,
-      onChange: address => this.setState({ address }),
+      // onChange: address => this.setState({ address }),
+      onChange: this.onChange.bind(this),
       autoFocus: true,
       placeholder
     };
@@ -42,6 +58,8 @@ class GooleAutoComplete extends React.Component {
           styles={myStyles}
           onSelect={this.onSelect.bind(this)}
         />
+        {touched &&
+          error && <ErrorText id="autocomplete_error">{error}</ErrorText>}
       </InputWrap>
     );
   }
@@ -66,6 +84,12 @@ const Label = styled.label`
   color: #000000;
   opacity: 0.3;
   font-size: ${rem(13)};
+`;
+
+const ErrorText = styled.p`
+  color: rgb(244, 67, 54);
+  font-size: 12px;
+  margin-top: 5px;
 `;
 
 const InputWrap = styled.div`

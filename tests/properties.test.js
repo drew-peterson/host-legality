@@ -26,7 +26,7 @@ describe('Add Property Step 1:', () => {
     await page.waitFor('#PlacesAutocomplete__root');
   });
 
-  test.only('address and unit number > next step', async () => {
+  test('address and unit number > next step', async () => {
     await page.type('#PlacesAutocomplete__root', '120 merion ter');
     await page.waitFor('#PlacesAutocomplete__autocomplete-container');
     await page.click('#PlacesAutocomplete__autocomplete-container div'); // select option...
@@ -36,5 +36,33 @@ describe('Add Property Step 1:', () => {
     const text = await page.getContentsOf('label');
     expect(text).toEqual('airbnb');
   });
-  test('Address is required and will display error message on next', async () => {});
+
+  test('Address is required and will display error message on next', async () => {
+    await page.click('.addPropertyBtn');
+    await page.waitFor('#autocomplete_error');
+    const text = await page.getContentsOf('#autocomplete_error');
+    expect(text).toEqual('valid address is required');
+  });
+  describe('Add property step 2:', () => {
+    beforeEach(async () => {
+      await page.type('#PlacesAutocomplete__root', '120 merion ter');
+      await page.waitFor('#PlacesAutocomplete__autocomplete-container');
+      await page.click('#PlacesAutocomplete__autocomplete-container div'); // select option...
+      await page.type('#unitNumber', '333');
+      await page.click('.addPropertyBtn');
+      await page.waitFor('#airbnb');
+    });
+
+    test('Host is required and will display and error message', async () => {
+      await page.click('.addPropertyBtn');
+      await page.waitFor('#host_error');
+      const text = await page.getContentsOf('#host_error');
+      expect(text).toEqual('please select a host');
+    });
+  });
+
+  test.only('selecting a host and submitting', async () => {
+    await page.click('#airbnb');
+    await page.click('.addPropertyBtn');
+  });
 });
