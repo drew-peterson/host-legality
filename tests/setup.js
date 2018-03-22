@@ -15,6 +15,9 @@ mongoose.connect(keys.MONGO_URI);
 const User = mongoose.model('User');
 User.findOne({ email: 'test@test.com' }).then(user => {
   if (!user) {
+    console.log('*********************************');
+    console.log('CREATE TEST@TEST.COM');
+    console.log('*********************************');
     new User({
       email: 'test@test.com',
       password: 'test'
