@@ -27,7 +27,10 @@ describe('Add Property Step 1:', () => {
   });
 
   test('address and unit number > next step', async () => {
-    await page.type('#PlacesAutocomplete__root', '120 merion ter');
+    await page.type(
+      '#PlacesAutocomplete__root',
+      '120 merion terrace moraga ca'
+    );
     await page.waitFor('#PlacesAutocomplete__autocomplete-container');
     await page.click('#PlacesAutocomplete__autocomplete-container div'); // select option...
     await page.type('#unitNumber', '333');
