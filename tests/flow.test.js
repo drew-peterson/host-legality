@@ -17,7 +17,7 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
-  // await page.close();
+  await page.close();
 });
 
 describe('Flow:', () => {
@@ -78,7 +78,6 @@ describe('Flow:', () => {
     });
 
     test.only('component payment updates property status on dashboard to paid', async () => {
-      console.log('property', _property);
       const stripe = {
         amount: 25.0,
         description: 'test description',
