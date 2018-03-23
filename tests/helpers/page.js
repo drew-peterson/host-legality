@@ -1,6 +1,8 @@
 const puppeteer = require('puppeteer');
 const sessionFactory = require('../factories/sessionFactory');
 const userFactory = require('../factories/userFactory');
+const mongoose = require('mongoose');
+const Property = mongoose.model('property');
 
 class CustomPage {
   // cannot call a static method on class from outside class
@@ -106,19 +108,31 @@ class CustomPage {
     return userFactory();
   }
 
-  async newProperty(address) {
-    await this.page.goto('http://localhost:3000/addProperty');
-    await this.page.waitFor('#PlacesAutocomplete__root');
-    await this.page.type('#PlacesAutocomplete__root', address);
-    await this.page.waitFor('#PlacesAutocomplete__autocomplete-container');
-    await this.page.click('#PlacesAutocomplete__autocomplete-container div'); // select option...
-    await this.page.waitFor(2000);
-    await this.page.click('.addPropertyBtn');
-    await this.page.waitFor('#airbnb');
-    await this.page.click('#airbnb');
-    await this.page.waitFor(2000);
-    await this.page.click('.addPropertyBtn');
-    await this.page.waitFor('.containerWrap');
+  async newProperty({ _user, address }) {
+    return new Property({
+      _user,
+      address,
+      host: 'airbnb', // not used currently...
+      googleData: {},
+      compliance: {
+        totalSteps: 4,
+        step: 1
+      },
+      status: 'pending-payment'
+    }).save();
+    // click route
+    // await this.page.goto('http://localhost:3000/addProperty');
+    // await this.page.waitFor('#PlacesAutocomplete__root');
+    // await this.page.type('#PlacesAutocomplete__root', address);
+    // await this.page.waitFor('#PlacesAutocomplete__autocomplete-container');
+    // await this.page.click('#PlacesAutocomplete__autocomplete-container div'); // select option...
+    // await this.page.waitFor(2000);
+    // await this.page.click('.addPropertyBtn');
+    // await this.page.waitFor('#airbnb');
+    // await this.page.click('#airbnb');
+    // await this.page.waitFor(2000);
+    // await this.page.click('.addPropertyBtn');
+    // await this.page.waitFor('.containerWrap');
   }
 }
 

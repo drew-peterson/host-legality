@@ -63,7 +63,7 @@ function find(next) {
 
 function findOneAndUpdate(next) {
   const property = this;
-  property.populate('_user', '-password');
+  // property.populate('_user', '-password');
   next();
 }
 
