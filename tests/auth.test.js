@@ -1,7 +1,6 @@
 const Page = require('./helpers/page');
 const faker = require('faker');
-const mongoose = require('mongoose');
-const User = mongoose.model('User');
+
 let page;
 beforeEach(async () => {
   page = await Page.build();

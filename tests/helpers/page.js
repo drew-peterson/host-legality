@@ -10,8 +10,8 @@ class CustomPage {
     let options;
     if (['test', 'development'].includes(env)) {
       options = {
-        headless: false,
-        slowMo: 20 // slow down by 20ms
+        headless: false
+        // slowMo: 20 // slow down by 20ms
       };
     } else {
       options = {
@@ -56,6 +56,7 @@ class CustomPage {
 
     await this.page.goto('http://localhost:3000/dashboard');
     await this.page.waitFor('#logout-nav'); // wait for component to render first...
+    return user;
   }
 
   async getContentsOf(selector) {
@@ -103,6 +104,21 @@ class CustomPage {
 
   newUser() {
     return userFactory();
+  }
+
+  async newProperty(address) {
+    await this.page.goto('http://localhost:3000/addProperty');
+    await this.page.waitFor('#PlacesAutocomplete__root');
+    await this.page.type('#PlacesAutocomplete__root', address);
+    await this.page.waitFor('#PlacesAutocomplete__autocomplete-container');
+    await this.page.click('#PlacesAutocomplete__autocomplete-container div'); // select option...
+    await this.page.waitFor(2000);
+    await this.page.click('.addPropertyBtn');
+    await this.page.waitFor('#airbnb');
+    await this.page.click('#airbnb');
+    await this.page.waitFor(2000);
+    await this.page.click('.addPropertyBtn');
+    await this.page.waitFor('.containerWrap');
   }
 }
 

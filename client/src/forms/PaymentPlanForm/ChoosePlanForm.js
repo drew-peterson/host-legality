@@ -29,7 +29,7 @@ const ChoosePlanForm = props => {
     );
   };
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} className="choosePlanForm">
       <Field name="plan" component={renderPlanItem} />
     </Form>
   );

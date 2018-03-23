@@ -15,7 +15,9 @@ class StripePayment extends Component {
         token={handlePay}
         stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
       >
-        <Button type="button">{btnText}</Button>
+        <Button type="button" className="stripeBtn">
+          {btnText}
+        </Button>
       </StripeCheckout>
     );
   }
