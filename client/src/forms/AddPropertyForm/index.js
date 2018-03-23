@@ -11,7 +11,7 @@ export default props => {
         return (
           <AddressForm
             nextBtnText="next"
-            form="getStarted"
+            form="addPropertyForm"
             onSubmit={nextPage}
           />
         );
@@ -19,7 +19,7 @@ export default props => {
         return (
           <SelectHostForm
             btnText="Submit"
-            form="getStarted"
+            form="addPropertyForm"
             onSubmit={onSubmitForm}
           />
         );
@@ -27,7 +27,7 @@ export default props => {
         return (
           <AddressForm
             nextBtnText="next"
-            form="getStarted"
+            form="addPropertyForm"
             onSubmit={nextPage}
           />
         );

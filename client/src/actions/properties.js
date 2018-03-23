@@ -4,7 +4,7 @@ import {
   MAKE_PAYMENT_PROPERTY,
   CLIENT_ERRORS
 } from './types';
-
+import { reset } from 'redux-form';
 import { GQL } from '../utils/helpers';
 import {
   SAVE_PROPERTY_MUTATION,
@@ -25,6 +25,7 @@ export const saveProperty = (input, history) => async dispatch => {
       variables: { input }
     });
     dispatch({ type: SAVE_PROPERTY, payload: saveProperty });
+    dispatch(reset('addPropertyForm')); // reset form because no unmount on form...
     history.push('/dashboard');
   } catch (err) {
     console.log('saveProperty err', err);
